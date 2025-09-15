@@ -1,0 +1,33 @@
+#requirements.txt
+# -----------------------------
+# Visualización
+# -----------------------------
+matplotlib==3.10.0         # Gráficos y visualización de datos
+tqdm==4.67.1               # Barras de progreso para loops
+
+# -----------------------------
+# Manipulación y análisis de datos
+# -----------------------------
+duckdb==1.3.2              # Motor SQL embebido para análisis de datos
+joblib==1.5.2              # Serialización de modelos y funciones
+numpy==2.0.2               # Computación numérica eficiente
+pandas==2.2.2              # Manipulación de datos tabulares
+scipy==1.16.1              # Funciones científicas y manejo de matrices
+
+# -----------------------------
+# Web scraping y manejo de URLs
+# -----------------------------
+requests==2.32.4           # Peticiones HTTP
+beautifulsoup4==4.13.5     # Parsing de HTML para scraping
+
+# -----------------------------
+# Machine learning y modelos
+# -----------------------------
+scikit-learn==1.6.1        # Modelos ML clásicos y métricas
+xgboost==3.0.4             # Boosting eficiente para regresión/clasificación
+tpot==1.1.0                # AutoML basado en evolución genética
+
+# -----------------------------
+# Estructura de grafos
+# -----------------------------
+networkx==3.5              # Análisis y visualización de grafos
