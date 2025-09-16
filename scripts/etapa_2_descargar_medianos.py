@@ -47,12 +47,13 @@ for archivo_txt in RUTA_CONFIG.glob("*.txt"):
     print(f"\n Procesando archivo: {archivo_txt.name}")
     with open(archivo_txt, "r", encoding="utf-8") as f:
         for linea in f:
-            url = linea.strip()
-            print(url)
-            if url.startswith("http") and url.endswith(".zip"):
-                nombre = descargar_zip(url, RUTA_DESTINO)
-                if nombre:
-                    descargados.append(nombre)
+            if "http" in linea and ".zip" in linea:
+                url = linea.strip().strip(',').strip('"').strip("'")
+                print(url)
+                if url.startswith("http") and url.endswith(".zip"):
+                    nombre = descargar_zip(url, RUTA_DESTINO)
+                    if nombre:
+                        descargados.append(nombre)
 
 # -----------------------------
 # Registro de descargas
