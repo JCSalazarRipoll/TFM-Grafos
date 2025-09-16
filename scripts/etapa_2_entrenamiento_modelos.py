@@ -13,6 +13,7 @@ from tpot import TPOTRegressor
 import joblib
 from pathlib import Path
 from tqdm import tqdm
+import time
 
 # -----------------------------
 # Configuración
@@ -54,26 +55,39 @@ modelos = {
 resultados = []
 
 for nombre, modelo in tqdm(modelos.items(), desc="Entrenando modelos"):
-    modelo.fit(X_train, y_train)
-    y_pred = modelo.predict(X_test)
+    try:
+        inicio = time.time()
+        modelo.fit(X_train, y_train)
+        duracion = time.time() - inicio
 
-    mae = mean_absolute_error(y_test, y_pred)
-    mse = mean_squared_error(y_test, y_pred)
-    r2 = r2_score(y_test, y_pred)
+        y_pred = modelo.predict(X_test)
 
-    resultados.append({
-        "modelo": nombre,
-        "MAE": mae,
-        "MSE": mse,
-        "R2": r2
-    })
+        mae = mean_absolute_error(y_test, y_pred)
+        mse = mean_squared_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
 
-    # Guardar modelo entrenado
-    joblib.dump(modelo, RUTA_MODELOS / f"{nombre}.joblib")
+        resultados.append({
+            "modelo": nombre,
+            "MAE": mae,
+            "MSE": mse,
+            "R2": r2,
+            "duracion_segundos": round(duracion, 2)
+        })
+
+        joblib.dump(modelo, RUTA_MODELOS / f"{nombre}.joblib")
+
+    except Exception as e:
+        print(f"⚠️ Error entrenando {nombre}: {e}")
 
 # -----------------------------
 # Resultados
 # -----------------------------
 df_resultados = pd.DataFrame(resultados)
+df_resultados.sort_values(by="R2", ascending=False, inplace=True)
+
 print("\n Resultados de evaluación:")
-print(df_resultados.sort_values(by="R2", ascending=False).round(4))
+print(df_resultados.round(4))
+
+# Guardar en CSV
+df_resultados.to_csv(RUTA_MODELOS / "resultados_modelos.csv", index=False)
+
