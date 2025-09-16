@@ -1,6 +1,46 @@
 import os, requests
 from pathlib import Path
 
+
+def descargar_y_descomprimir(nombre, url, carpeta_descarga="data/grafos_medianos"):
+    os.makedirs(carpeta_descarga, exist_ok=True)
+    zip_path = os.path.join(carpeta_descarga, f"{nombre}.zip")
+    destino_dir = os.path.join(carpeta_descarga, f"{nombre}_descomprimido")
+
+    if not os.path.exists(zip_path):
+        print(f"Descargando {nombre}...")
+        r = requests.get(url)
+        with open(zip_path, 'wb') as f:
+            f.write(r.content)
+    else:
+        print(f"Ya descargado: {zip_path}")
+
+    if not os.path.exists(destino_dir):
+        print(f"Descomprimiendo en: {destino_dir}")
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(destino_dir)
+    else:
+        print(f"Ya descomprimido: {destino_dir}")
+
+    return destino_dir
+
+grafos_masivos = {
+    "soc-flickr": "https://nrvis.com/download/data/soc/soc-flickr.zip",
+    "soc-livejournal": "https://nrvis.com/download/data/soc/soc-livejournal.zip",
+    "soc-pokec": "https://nrvis.com/download/data/soc/soc-pokec.zip"
+}
+
+if __name__ == "__main__":
+    for nombre, url in grafos_masivos.items():
+        ruta_final = descargar_y_descomprimir(nombre, url)
+        print(f"Grafo listo: {ruta_final}")
+
+
+ 
+ 
+ 
+
+
 # -----------------------------
 # Configuración de rutas
 # -----------------------------
@@ -13,22 +53,7 @@ RUTA_DESTINO.mkdir(parents=True, exist_ok=True)
 # -----------------------------
 def descargar_zip(url, destino):
     nombre = url.split("/")[-1]
-    ruta_archivo = destino / nombre
-
-    if ruta_archivo.exists():
-        print(f"✅ Ya existe: {nombre}")
-        return nombre
-
-    try:
-        print(f"⬇️ Descargando: {nombre}")
-        response = requests.get(url, timeout=30)
-        response.raise_for_status()
-        with open(ruta_archivo, "wb") as f:
-            f.write(response.content)
-        return nombre
-    except Exception as e:
-        print(f"❌ Error al descargar {nombre}: {e}")
-        return None
+    descargar_y_descomprimir(nombre, url)
 
 # -----------------------------
 # Proceso principal
@@ -36,7 +61,7 @@ def descargar_zip(url, destino):
 descargados = []
 
 for archivo_txt in RUTA_CONFIG.glob("*.txt"):
-    print(f"\n📄 Procesando archivo: {archivo_txt.name}")
+    print(f"\n Procesando archivo: {archivo_txt.name}")
     with open(archivo_txt, "r", encoding="utf-8") as f:
         for linea in f:
             url = linea.strip()
