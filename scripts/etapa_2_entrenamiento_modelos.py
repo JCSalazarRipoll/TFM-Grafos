@@ -75,5 +75,5 @@ for nombre, modelo in tqdm(modelos.items(), desc="Entrenando modelos"):
 # Resultados
 # -----------------------------
 df_resultados = pd.DataFrame(resultados)
-print("\n📊 Resultados de evaluación:")
+print("\n Resultados de evaluación:")
 print(df_resultados.sort_values(by="R2", ascending=False).round(4))
