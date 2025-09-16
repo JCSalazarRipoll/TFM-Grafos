@@ -48,6 +48,7 @@ for archivo_txt in RUTA_CONFIG.glob("*.txt"):
     with open(archivo_txt, "r", encoding="utf-8") as f:
         for linea in f:
             url = linea.strip()
+            print(ulr)
             if url.startswith("http") and url.endswith(".zip"):
                 nombre = descargar_zip(url, RUTA_DESTINO)
                 if nombre:
