@@ -1,32 +1,122 @@
-grafos_zip = [
-    "https://nrvis.com/download/data/bhoslib/frb30-15-2.zip",
-    "https://nrvis.com/download/data/bhoslib/frb30-15-4.zip",
-    "https://nrvis.com/download/data/bhoslib/frb30-15-1.zip",
-    "https://nrvis.com/download/data/bhoslib/frb30-15-3.zip",
-    "https://nrvis.com/download/data/bhoslib/frb30-15-5.zip",
-    "https://nrvis.com/download/data/bhoslib/frb35-17-5.zip",
-    "https://nrvis.com/download/data/bhoslib/frb35-17-3.zip",
-    "https://nrvis.com/download/data/bhoslib/frb35-17-1.zip",
-    "https://nrvis.com/download/data/bhoslib/frb35-17-2.zip",
-    "https://nrvis.com/download/data/bhoslib/frb35-17-4.zip",
-    "https://nrvis.com/download/data/bhoslib/frb40-19-5.zip",
-    "https://nrvis.com/download/data/bhoslib/frb40-19-4.zip",
-    "https://nrvis.com/download/data/bhoslib/frb40-19-3.zip",
-    "https://nrvis.com/download/data/bhoslib/frb40-19-2.zip",
-    "https://nrvis.com/download/data/bhoslib/frb40-19-1.zip",
-    "https://nrvis.com/download/data/bhoslib/frb45-21-1.zip",
-    "https://nrvis.com/download/data/bhoslib/frb45-21-2.zip",
-    "https://nrvis.com/download/data/bhoslib/frb45-21-3.zip",
-    "https://nrvis.com/download/data/bhoslib/frb45-21-4.zip",
-    "https://nrvis.com/download/data/bhoslib/frb45-21-5.zip",
-    "https://nrvis.com/download/data/bhoslib/frb50-23-1.zip",
-    "https://nrvis.com/download/data/bhoslib/frb50-23-2.zip",
-    "https://nrvis.com/download/data/bhoslib/frb50-23-3.zip",
-    "https://nrvis.com/download/data/bhoslib/frb50-23-4.zip",
-    "https://nrvis.com/download/data/bhoslib/frb50-23-5.zip",
-    "https://nrvis.com/download/data/bhoslib/frb53-24-1.zip",
-    "https://nrvis.com/download/data/bhoslib/frb53-24-2.zip",
-    "https://nrvis.com/download/data/bhoslib/frb53-24-3.zip",
-    "https://nrvis.com/download/data/bhoslib/frb53-24-4.zip",
-    "https://nrvis.com/download/data/bhoslib/frb53-24-5.zip"
-]
+bhoslib_graphs = {
+    "frb30-15-2": [
+        "https://networkrepository.com/frb30-15-2.php",
+        "https://nrvis.com/download/data/bhoslib/frb30-15-2.zip"
+    ],
+    "frb30-15-4": [
+        "https://networkrepository.com/frb30-15-4.php",
+        "https://nrvis.com/download/data/bhoslib/frb30-15-4.zip"
+    ],
+    "frb30-15-1": [
+        "https://networkrepository.com/frb30-15-1.php",
+        "https://nrvis.com/download/data/bhoslib/frb30-15-1.zip"
+    ],
+    "frb30-15-3": [
+        "https://networkrepository.com/frb30-15-3.php",
+        "https://nrvis.com/download/data/bhoslib/frb30-15-3.zip"
+    ],
+    "frb30-15-5": [
+        "https://networkrepository.com/frb30-15-5.php",
+        "https://nrvis.com/download/data/bhoslib/frb30-15-5.zip"
+    ],
+    "frb35-17-5": [
+        "https://networkrepository.com/frb35-17-5.php",
+        "https://nrvis.com/download/data/bhoslib/frb35-17-5.zip"
+    ],
+    "frb35-17-3": [
+        "https://networkrepository.com/frb35-17-3.php",
+        "https://nrvis.com/download/data/bhoslib/frb35-17-3.zip"
+    ],
+    "frb35-17-1": [
+        "https://networkrepository.com/frb35-17-1.php",
+        "https://nrvis.com/download/data/bhoslib/frb35-17-1.zip"
+    ],
+    "frb35-17-2": [
+        "https://networkrepository.com/frb35-17-2.php",
+        "https://nrvis.com/download/data/bhoslib/frb35-17-2.zip"
+    ],
+    "frb35-17-4": [
+        "https://networkrepository.com/frb35-17-4.php",
+        "https://nrvis.com/download/data/bhoslib/frb35-17-4.zip"
+    ],
+    "frb40-19-5": [
+        "https://networkrepository.com/frb40-19-5.php",
+        "https://nrvis.com/download/data/bhoslib/frb40-19-5.zip"
+    ],
+    "frb40-19-4": [
+        "https://networkrepository.com/frb40-19-4.php",
+        "https://nrvis.com/download/data/bhoslib/frb40-19-4.zip"
+    ],
+    "frb40-19-3": [
+        "https://networkrepository.com/frb40-19-3.php",
+        "https://nrvis.com/download/data/bhoslib/frb40-19-3.zip"
+    ],
+    "frb40-19-2": [
+        "https://networkrepository.com/frb40-19-2.php",
+        "https://nrvis.com/download/data/bhoslib/frb40-19-2.zip"
+    ],
+    "frb40-19-1": [
+        "https://networkrepository.com/frb40-19-1.php",
+        "https://nrvis.com/download/data/bhoslib/frb40-19-1.zip"
+    ],
+    "frb45-21-1": [
+        "https://networkrepository.com/frb45-21-1.php",
+        "https://nrvis.com/download/data/bhoslib/frb45-21-1.zip"
+    ],
+    "frb45-21-2": [
+        "https://networkrepository.com/frb45-21-2.php",
+        "https://nrvis.com/download/data/bhoslib/frb45-21-2.zip"
+    ],
+    "frb45-21-3": [
+        "https://networkrepository.com/frb45-21-3.php",
+        "https://nrvis.com/download/data/bhoslib/frb45-21-3.zip"
+    ],
+    "frb45-21-4": [
+        "https://networkrepository.com/frb45-21-4.php",
+        "https://nrvis.com/download/data/bhoslib/frb45-21-4.zip"
+    ],
+    "frb45-21-5": [
+        "https://networkrepository.com/frb45-21-5.php",
+        "https://nrvis.com/download/data/bhoslib/frb45-21-5.zip"
+    ],
+    "frb50-23-1": [
+        "https://networkrepository.com/frb50-23-1.php",
+        "https://nrvis.com/download/data/bhoslib/frb50-23-1.zip"
+    ],
+    "frb50-23-2": [
+        "https://networkrepository.com/frb50-23-2.php",
+        "https://nrvis.com/download/data/bhoslib/frb50-23-2.zip"
+    ],
+    "frb50-23-3": [
+        "https://networkrepository.com/frb50-23-3.php",
+        "https://nrvis.com/download/data/bhoslib/frb50-23-3.zip"
+    ],
+    "frb50-23-4": [
+        "https://networkrepository.com/frb50-23-4.php",
+        "https://nrvis.com/download/data/bhoslib/frb50-23-4.zip"
+    ],
+    "frb50-23-5": [
+        "https://networkrepository.com/frb50-23-5.php",
+        "https://nrvis.com/download/data/bhoslib/frb50-23-5.zip"
+    ],
+    "frb53-24-1": [
+        "https://networkrepository.com/frb53-24-1.php",
+        "https://nrvis.com/download/data/bhoslib/frb53-24-1.zip"
+    ],
+    "frb53-24-2": [
+        "https://networkrepository.com/frb53-24-2.php",
+        "https://nrvis.com/download/data/bhoslib/frb53-24-2.zip"
+    ],
+    "frb53-24-3": [
+        "https://networkrepository.com/frb53-24-3.php",
+        "https://nrvis.com/download/data/bhoslib/frb53-24-3.zip"
+    ],
+    "frb53-24-4": [
+        "https://networkrepository.com/frb53-24-4.php",
+        "https://nrvis.com/download/data/bhoslib/frb53-24-4.zip"
+    ],
+    "frb53-24-5": [
+        "https://networkrepository.com/frb53-24-5.php",
+        "https://nrvis.com/download/data/bhoslib/frb53-24-5.zip"
+    ]
+}
