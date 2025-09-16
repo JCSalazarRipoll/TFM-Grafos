@@ -28,7 +28,7 @@ df = pd.read_csv(RUTA_METADATA)
 
 # Filtrado de columnas numéricas
 X = df.drop(columns=["nombre", "distancia_promedio","duracion_calculo"])
-y = df["average_distance"]
+y = df["distancia_promedio"]
 
 # -----------------------------
 # División de datos
