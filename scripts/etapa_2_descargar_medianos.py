@@ -1,74 +1,57 @@
-import pandas as pd
-import logging
-import os
+import os, requests
 from pathlib import Path
-import requests
 
-#Cargar funciones desde los diferentes directorios creados
-from collectors.parser import url_dataframe
-from collectors import guardar_resultados_en_duckdb, leer_config_desde_txt
+# -----------------------------
+# Configuración de rutas
+# -----------------------------
+RUTA_CONFIG = Path("config/")
+RUTA_DESTINO = Path("data/grafos_medianos/")
+RUTA_DESTINO.mkdir(parents=True, exist_ok=True)
 
-carpeta = Path("graphs")
-archivos_txt = sorted(carpeta.glob("*.txt"))  # Todos los .txt ordenados alfabéticamente
+# -----------------------------
+# Función para descargar un .zip
+# -----------------------------
+def descargar_zip(url, destino):
+    nombre = url.split("/")[-1]
+    ruta_archivo = destino / nombre
 
-# Ruta del archivo donde se guardan los datos procesados
-CSV_PATH = "datos_grafos.csv"
+    if ruta_archivo.exists():
+        print(f"✅ Ya existe: {nombre}")
+        return nombre
 
-# Cargar grafos ya procesados (si existe)
-if os.path.exists(CSV_PATH):
-    df = pd.read_csv(CSV_PATH)
-    processed_urls = set(df["url"])
-else:
-    df = pd.DataFrame()
-    processed_urls = set()
-
-# Filtrar las urls que aún no han sido procesadas
-remaining_collectors = []
-
-for path_txt in archivos_txt:
     try:
-        with open(path_txt, "r", encoding="utf-8") as f:
-            head_url = None
-            for linea in f:
-                linea = linea.strip()
-                if linea.startswith("head_url ="):
-                    head_url = linea.split("=")[1].strip().strip("'")
-                    break  # no necesitamos leer más
-            if head_url and head_url not in processed_urls:
-                remaining_collectors.append(path_txt)
+        print(f"⬇️ Descargando: {nombre}")
+        response = requests.get(url, timeout=30)
+        response.raise_for_status()
+        with open(ruta_archivo, "wb") as f:
+            f.write(response.content)
+        return nombre
     except Exception as e:
-        print(f"Error leyendo {path_txt}: {e}")
+        print(f"❌ Error al descargar {nombre}: {e}")
+        return None
 
-# Tomar solo los primeros 2
-to_process = remaining_collectors[:2]
+# -----------------------------
+# Proceso principal
+# -----------------------------
+descargados = []
 
-try:
-    logging.info("Inicio del proceso de recopilación y análisis de grafos.")
-    
-    #Esta función devuelve un dataframe con los datos obtenidos de los grafos
+for archivo_txt in RUTA_CONFIG.glob("*.txt"):
+    print(f"\n📄 Procesando archivo: {archivo_txt.name}")
+    with open(archivo_txt, "r", encoding="utf-8") as f:
+        for linea in f:
+            url = linea.strip()
+            if url.startswith("http") and url.endswith(".zip"):
+                nombre = descargar_zip(url, RUTA_DESTINO)
+                if nombre:
+                    descargados.append(nombre)
 
-    for archivo in to_process:
-        head_url, urls = leer_config_desde_txt(archivo)
-        df_temp = url_dataframe(urls,head_url)
-        df = pd.concat([df, df_temp], ignore_index=True)
-
-    #En caso de que se hayan podido procesar los grafos correctamente
-    if not df.empty:
-        # Elimina duplicados por nombre, nodos y aristas
-        df.drop_duplicates(subset=["nombre", "nodos", "aristas"], inplace=True)
-
-        # Guarda como CSV
-        df.to_csv("datos_grafos.csv", index=False)
-        logging.info(f"{len(df)} grafos procesados correctamente. Archivo guardado como datos_grafos.csv")
-
-        # Muestra el resumen básico
-        logging.info("Resumen de grafos procesados:\n" + df[["nombre", "nodos", "aristas"]].to_string(index=False))
-
-        # Guarda en DuckDB
-        guardar_resultados_en_duckdb(df, db_path="resultados.duckdb", tabla="experimentos")
-        logging.info("Resultados almacenados en la base de datos DuckDB: resultados.duckdb")
-        
-    else:
-        logging.info("No se procesó ningún grafo válido.")
-except Exception as e:
-    logging.error("Ocurrió un error durante la ejecución", exc_info=True)
+# -----------------------------
+# Registro de descargas
+# -----------------------------
+if descargados:
+    with open(RUTA_DESTINO / "descargas_registradas.txt", "w", encoding="utf-8") as f:
+        for nombre in descargados:
+            f.write(nombre + "\n")
+    print(f"\n📁 Se registraron {len(descargados)} descargas en descargas_registradas.txt")
+else:
+    print("\n⚠️ No se descargó ningún archivo nuevo.")
