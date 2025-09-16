@@ -1,11 +1,39 @@
-grafos_zip = [
-    "https://nrvis.com/download/data/bn/bn-mouse_retina_1.zip",
-    "https://nrvis.com/download/data/bn/bn-mouse_brain_1.zip",
-    "https://nrvis.com/download/data/bn/bn-macaque-rhesus_brain_1.zip",
-    "https://nrvis.com/download/data/bn/bn-macaque-rhesus_interareal-cortical-network_2.zip",
-    "https://nrvis.com/download/data/bn/bn-macaque-rhesus_cerebral-cortex_1.zip",
-    "https://nrvis.com/download/data/bn/bn-cat-mixed-species_brain_1.zip",
-    "https://nrvis.com/download/data/bn/bn-macaque-rhesus_brain_2.zip",
-    "https://nrvis.com/download/data/bn/bn-mouse_visual-cortex_2.zip",
-    "https://nrvis.com/download/data/bn/bn-mouse_visual-cortex_1.zip"
-]
+bn_graphs = {
+    "bn-mouse-retina-1": [
+        "https://networkrepository.com/bn-mouse-retina-1.php",
+        "https://nrvis.com/download/data/bn/bn-mouse_retina_1.zip"
+    ],
+    "bn-mouse-brain-1": [
+        "https://networkrepository.com/bn-mouse-brain-1.php",
+        "https://nrvis.com/download/data/bn/bn-mouse_brain_1.zip"
+    ],
+    "bn-macaque-rhesus-brain-1": [
+        "https://networkrepository.com/bn-macaque-rhesus-brain-1.php",
+        "https://nrvis.com/download/data/bn/bn-macaque-rhesus_brain_1.zip"
+    ],
+    "bn-macaque-rhesus-interareal-cortical-network-2": [
+        "https://networkrepository.com/bn-macaque-rhesus-interareal-cortical-network-2.php",
+        "https://nrvis.com/download/data/bn/bn-macaque-rhesus_interareal-cortical-network_2.zip"
+    ],
+    "bn-macaque-rhesus-cerebral-cortex-1": [
+        "https://networkrepository.com/bn-macaque-rhesus-cerebral-cortex-1.php",
+        "https://nrvis.com/download/data/bn/bn-macaque-rhesus_cerebral-cortex_1.zip"
+    ],
+    "bn-cat-mixed-species-brain-1": [
+        "https://networkrepository.com/bn-cat-mixed-species-brain-1.php",
+        "https://nrvis.com/download/data/bn/bn-cat-mixed-species_brain_1.zip"
+    ],
+    "bn-macaque-rhesus-brain-2": [
+        "https://networkrepository.com/bn-macaque-rhesus-brain-2.php",
+        "https://nrvis.com/download/data/bn/bn-macaque-rhesus_brain_2.zip"
+    ],
+    "bn-mouse-visual-cortex-2": [
+        "https://networkrepository.com/bn-mouse-visual-cortex-2.php",
+        "https://nrvis.com/download/data/bn/bn-mouse_visual-cortex_2.zip"
+    ],
+    "bn-mouse-visual-cortex-1": [
+        "https://networkrepository.com/bn-mouse-visual-cortex-1.php",
+        "https://nrvis.com/download/data/bn/bn-mouse_visual-cortex_1.zip"
+    ]
+}
+
