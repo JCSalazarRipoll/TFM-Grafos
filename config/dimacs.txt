@@ -1,42 +1,162 @@
-graphs_zip = [
-    "https://nrvis.com/download/data/dimacs/p-hat1500-3.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat1500-2.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat1500-1.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat1000-2.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat1000-1.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat700-3.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat700-2.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat700-1.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat500-3.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat500-2.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat300-3.zip",
-    "https://nrvis.com/download/data/dimacs/brock800-1.zip",
-    "https://nrvis.com/download/data/dimacs/brock800-2.zip",
-    "https://nrvis.com/download/data/dimacs/brock800-3.zip",
-    "https://nrvis.com/download/data/dimacs/brock800-4.zip",
-    "https://nrvis.com/download/data/dimacs/brock400-1.zip",
-    "https://nrvis.com/download/data/dimacs/brock400-2.zip",
-    "https://nrvis.com/download/data/dimacs/brock400-3.zip",
-    "https://nrvis.com/download/data/dimacs/brock400-4.zip",
-    "https://nrvis.com/download/data/dimacs/brock200-1.zip",
-    "https://nrvis.com/download/data/dimacs/brock200-2.zip",
-    "https://nrvis.com/download/data/dimacs/brock200-3.zip",
-    "https://nrvis.com/download/data/dimacs/brock200-4.zip",
-    "https://nrvis.com/download/data/dimacs/hamming10-2.zip",
-    "https://nrvis.com/download/data/dimacs/C1000-9.zip",
-    "https://nrvis.com/download/data/dimacs/san1000.zip",
-    "https://nrvis.com/download/data/dimacs/san400-0-9-1.zip",
-    "https://nrvis.com/download/data/dimacs/san400-0-7-1.zip",
-    "https://nrvis.com/download/data/dimacs/san400-0-7-2.zip",
-    "https://nrvis.com/download/data/dimacs/san400-0-7-3.zip",
-    "https://nrvis.com/download/data/dimacs/san400-0-5-1.zip",
-    "https://nrvis.com/download/data/dimacs/san200-0-9-1.zip",
-    "https://nrvis.com/download/data/dimacs/san200-0-9-2.zip",
-    "https://nrvis.com/download/data/dimacs/san200-0-9-3.zip",
-    "https://nrvis.com/download/data/dimacs/san200-0-7-2.zip",
-    "https://nrvis.com/download/data/dimacs/san200-0-7-1.zip",
-    "https://nrvis.com/download/data/dimacs/sanr200-0-9.zip",
-    "https://nrvis.com/download/data/dimacs/sanr200-0-7.zip",
-    "https://nrvis.com/download/data/dimacs/sanr400-0-5.zip",
-    "https://nrvis.com/download/data/dimacs/sanr400-0-7.zip"
-]
+dimacs_graphs = {
+    "p-hat1500-3": [
+        "https://networkrepository.com/p-hat1500-3.php",
+        "https://nrvis.com/download/data/dimacs/p-hat1500-3.zip"
+    ],
+    "p-hat1500-2": [
+        "https://networkrepository.com/p-hat1500-2.php",
+        "https://nrvis.com/download/data/dimacs/p-hat1500-2.zip"
+    ],
+    "p-hat1500-1": [
+        "https://networkrepository.com/p-hat1500-1.php",
+        "https://nrvis.com/download/data/dimacs/p-hat1500-1.zip"
+    ],
+    "p-hat1000-2": [
+        "https://networkrepository.com/p-hat1000-2.php",
+        "https://nrvis.com/download/data/dimacs/p-hat1000-2.zip"
+    ],
+    "p-hat1000-1": [
+        "https://networkrepository.com/p-hat1000-1.php",
+        "https://nrvis.com/download/data/dimacs/p-hat1000-1.zip"
+    ],
+    "p-hat700-3": [
+        "https://networkrepository.com/p-hat700-3.php",
+        "https://nrvis.com/download/data/dimacs/p-hat700-3.zip"
+    ],
+    "p-hat700-2": [
+        "https://networkrepository.com/p-hat700-2.php",
+        "https://nrvis.com/download/data/dimacs/p-hat700-2.zip"
+    ],
+    "p-hat700-1": [
+        "https://networkrepository.com/p-hat700-1.php",
+        "https://nrvis.com/download/data/dimacs/p-hat700-1.zip"
+    ],
+    "p-hat500-3": [
+        "https://networkrepository.com/p-hat500-3.php",
+        "https://nrvis.com/download/data/dimacs/p-hat500-3.zip"
+    ],
+    "p-hat500-2": [
+        "https://networkrepository.com/p-hat500-2.php",
+        "https://nrvis.com/download/data/dimacs/p-hat500-2.zip"
+    ],
+    "p-hat300-3": [
+        "https://networkrepository.com/p-hat300-3.php",
+        "https://nrvis.com/download/data/dimacs/p-hat300-3.zip"
+    ],
+    "brock800-1": [
+        "https://networkrepository.com/brock800-1.php",
+        "https://nrvis.com/download/data/dimacs/brock800-1.zip"
+    ],
+    "brock800-2": [
+        "https://networkrepository.com/brock800-2.php",
+        "https://nrvis.com/download/data/dimacs/brock800-2.zip"
+    ],
+    "brock800-3": [
+        "https://networkrepository.com/brock800-3.php",
+        "https://nrvis.com/download/data/dimacs/brock800-3.zip"
+    ],
+    "brock800-4": [
+        "https://networkrepository.com/brock800-4.php",
+        "https://nrvis.com/download/data/dimacs/brock800-4.zip"
+    ],
+    "brock400-1": [
+        "https://networkrepository.com/brock400-1.php",
+        "https://nrvis.com/download/data/dimacs/brock400-1.zip"
+    ],
+    "brock400-2": [
+        "https://networkrepository.com/brock400-2.php",
+        "https://nrvis.com/download/data/dimacs/brock400-2.zip"
+    ],
+    "brock400-3": [
+        "https://networkrepository.com/brock400-3.php",
+        "https://nrvis.com/download/data/dimacs/brock400-3.zip"
+    ],
+    "brock400-4": [
+        "https://networkrepository.com/brock400-4.php",
+        "https://nrvis.com/download/data/dimacs/brock400-4.zip"
+    ],
+    "brock200-1": [
+        "https://networkrepository.com/brock200-1.php",
+        "https://nrvis.com/download/data/dimacs/brock200-1.zip"
+    ],
+    "brock200-2": [
+        "https://networkrepository.com/brock200-2.php",
+        "https://nrvis.com/download/data/dimacs/brock200-2.zip"
+    ],
+    "brock200-3": [
+        "https://networkrepository.com/brock200-3.php",
+        "https://nrvis.com/download/data/dimacs/brock200-3.zip"
+    ],
+    "brock200-4": [
+        "https://networkrepository.com/brock200-4.php",
+        "https://nrvis.com/download/data/dimacs/brock200-4.zip"
+    ],
+    "hamming10-2": [
+        "https://networkrepository.com/hamming10-2.php",
+        "https://nrvis.com/download/data/dimacs/hamming10-2.zip"
+    ],
+    "C1000-9": [
+        "https://networkrepository.com/C1000-9.php",
+        "https://nrvis.com/download/data/dimacs/C1000-9.zip"
+    ],
+    "san1000": [
+        "https://networkrepository.com/san1000.php",
+        "https://nrvis.com/download/data/dimacs/san1000.zip"
+    ],
+    "san400-0-9-1": [
+        "https://networkrepository.com/san400-0-9-1.php",
+        "https://nrvis.com/download/data/dimacs/san400-0-9-1.zip"
+    ],
+    "san400-0-7-1": [
+        "https://networkrepository.com/san400-0-7-1.php",
+        "https://nrvis.com/download/data/dimacs/san400-0-7-1.zip"
+    ],
+    "san400-0-7-2": [
+        "https://networkrepository.com/san400-0-7-2.php",
+        "https://nrvis.com/download/data/dimacs/san400-0-7-2.zip"
+    ],
+    "san400-0-7-3": [
+        "https://networkrepository.com/san400-0-7-3.php",
+        "https://nrvis.com/download/data/dimacs/san400-0-7-3.zip"
+    ],
+    "san400-0-5-1": [
+        "https://networkrepository.com/san400-0-5-1.php",
+        "https://nrvis.com/download/data/dimacs/san400-0-5-1.zip"
+    ],
+    "san200-0-9-1": [
+        "https://networkrepository.com/san200-0-9-1.php",
+        "https://nrvis.com/download/data/dimacs/san200-0-9-1.zip"
+    ],
+    "san200-0-9-2": [
+        "https://networkrepository.com/san200-0-9-2.php",
+        "https://nrvis.com/download/data/dimacs/san200-0-9-2.zip"
+    ],
+    "san200-0-9-3": [
+        "https://networkrepository.com/san200-0-9-3.php",
+        "https://nrvis.com/download/data/dimacs/san200-0-9-3.zip"
+    ],
+    "san200-0-7-2": [
+        "https://networkrepository.com/san200-0-7-2.php",
+        "https://nrvis.com/download/data/dimacs/san200-0-7-2.zip"
+    ],
+    "san200-0-7-1": [
+        "https://networkrepository.com/san200-0-7-1.php",
+        "https://nrvis.com/download/data/dimacs/san200-0-7-1.zip"
+    ],
+    "sanr200-0-9": [
+        "https://networkrepository.com/sanr200-0-9.php",
+        "https://nrvis.com/download/data/dimacs/sanr200-0-9.zip"
+    ],
+    "sanr200-0-7": [
+        "https://networkrepository.com/sanr200-0-7.php",
+        "https://nrvis.com/download/data/dimacs/sanr200-0-7.zip"
+    ],
+    "sanr400-0-5": [
+        "https://networkrepository.com/sanr400-0-5.php",
+        "https://nrvis.com/download/data/dimacs/sanr400-0-5.zip"
+    ],
+    "sanr400-0-7": [
+        "https://networkrepository.com/sanr400-0-7.php",
+        "https://nrvis.com/download/data/dimacs/sanr400-0-7.zip"
+    ]
+}
