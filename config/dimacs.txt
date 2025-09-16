@@ -1,6 +1,6 @@
 graphs_zip = [
     "https://nrvis.com/download/data/dimacs/p-hat1500-3.zip",
-    "https://nrvis.com/download/data/dimacs/p-hat1500-2.zip"
+    "https://nrvis.com/download/data/dimacs/p-hat1500-2.zip",
     "https://nrvis.com/download/data/dimacs/p-hat1500-1.zip",
     "https://nrvis.com/download/data/dimacs/p-hat1000-2.zip",
     "https://nrvis.com/download/data/dimacs/p-hat1000-1.zip",
