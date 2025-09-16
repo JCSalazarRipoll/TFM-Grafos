@@ -27,7 +27,7 @@ RUTA_MODELOS.mkdir(parents=True, exist_ok=True)
 df = pd.read_csv(RUTA_METADATA)
 
 # Filtrado de columnas numéricas
-X = df.drop(columns=["nombre_grafo", "average_distance"])
+X = df.drop(columns=["nombre", "distancia_promedio","duracion_calculo"])
 y = df["average_distance"]
 
 # -----------------------------
