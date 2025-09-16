@@ -1,6 +1,18 @@
-grafos_zip = [
-    'https://nrvis.com/download/data/bio/bio-SC-CC.zip',
-    'https://nrvis.com/download/data/bio/bio-dmela.zip',
-    'https://nrvis.com/download/data/bio/bio-celegans-dir.zip',
-    'https://nrvis.com/download/data/bio/bio-diseasome.zip'
-]
+bio_graphs = {
+    "bio-SC-CC": [
+        "https://networkrepository.com/bio-SC-CC.php",
+        "https://nrvis.com/download/data/bio/bio-SC-CC.zip"
+    ],
+    "bio-dmela": [
+        "https://networkrepository.com/bio-dmela.php",
+        "https://nrvis.com/download/data/bio/bio-dmela.zip"
+    ],
+    "bio-celegans-dir": [
+        "https://networkrepository.com/bio-celegans-dir.php",
+        "https://nrvis.com/download/data/bio/bio-celegans-dir.zip"
+    ],
+    "bio-diseasome": [
+        "https://networkrepository.com/bio-diseasome.php",
+        "https://nrvis.com/download/data/bio/bio-diseasome.zip"
+    ]
+}
