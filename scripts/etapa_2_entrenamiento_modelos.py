@@ -2,18 +2,17 @@
 
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split, KFold
+import time
+from pathlib import Path
+from sklearn.model_selection import KFold, train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, ExtraTreesRegressor
 from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from xgboost import XGBRegressor
 from tpot import TPOTRegressor
 import joblib
-from pathlib import Path
-from tqdm import tqdm
-import time
 
 # -----------------------------
 # Configuración
@@ -23,71 +22,95 @@ RUTA_MODELOS = Path("data/modelos_entrenados/")
 RUTA_MODELOS.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------
-# Carga y preprocesamiento
+# Carga y selección de columnas
 # -----------------------------
 df = pd.read_csv(RUTA_METADATA)
 
-# Filtrado de columnas numéricas
-X = df.drop(columns=["nombre", "distancia_promedio","duracion_calculo"])
+columnas_viables = [
+    'nodos', 'aristas', 'grado_maximo', 'grado_promedio', 'asortatividad',
+    'numero_triangulos', 'triangulos_promedio', 'triangulos_maximo',
+    'coeficiente_aglomeracion_promedio', 'proporcion_triangulos_promedio',
+    'centro_k_maximo', 'estimacion_minima_clique_maxima'
+]
+
+X = df[columnas_viables]
 y = df["distancia_promedio"]
 
 # -----------------------------
-# División de datos
+# Validación cruzada
 # -----------------------------
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
 
 # -----------------------------
-# Modelos a entrenar
+# Modelos clásicos
 # -----------------------------
 modelos = {
     "LinearRegression": LinearRegression(),
     "RandomForest": RandomForestRegressor(n_estimators=100, random_state=42),
-    "GradientBoosting": GradientBoostingRegressor(n_estimators=100, random_state=42),
+    "GradientBoosting": GradientBoostingRegressor(random_state=42),
+    "ExtraTrees": ExtraTreesRegressor(random_state=42),
     "SVR": SVR(),
     "KNN": KNeighborsRegressor(),
-    "XGBoost": XGBRegressor(n_estimators=100, random_state=42),
-    "TPOT": TPOTRegressor(generations=5, population_size=20, verbosity=2, random_state=42)
+    "XGBoost": XGBRegressor(objective='reg:squarederror', n_estimators=100, random_state=42)
 }
 
-# -----------------------------
-# Entrenamiento y evaluación
-# -----------------------------
 resultados = []
 
-for nombre, modelo in tqdm(modelos.items(), desc="Entrenando modelos"):
-    try:
-        inicio = time.time()
-        modelo.fit(X_train, y_train)
-        duracion = time.time() - inicio
+for nombre, modelo in modelos.items():
+    mae_list, rmse_list, r2_list = [], [], []
+    inicio = time.time()
 
+    for train_idx, test_idx in kf.split(X):
+        X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+        y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+
+        modelo.fit(X_train, y_train)
         y_pred = modelo.predict(X_test)
 
-        mae = mean_absolute_error(y_test, y_pred)
-        mse = mean_squared_error(y_test, y_pred)
-        r2 = r2_score(y_test, y_pred)
+        mae_list.append(mean_absolute_error(y_test, y_pred))
+        rmse_list.append(np.sqrt(mean_squared_error(y_test, y_pred)))
+        r2_list.append(r2_score(y_test, y_pred))
 
-        resultados.append({
-            "modelo": nombre,
-            "MAE": mae,
-            "MSE": mse,
-            "R2": r2,
-            "duracion_segundos": round(duracion, 2)
-        })
+    duracion = time.time() - inicio
+    joblib.dump(modelo, RUTA_MODELOS / f"{nombre}.joblib")
 
-        joblib.dump(modelo, RUTA_MODELOS / f"{nombre}.joblib")
-
-    except Exception as e:
-        print(f"⚠️ Error entrenando {nombre}: {e}")
+    resultados.append({
+        "modelo": nombre,
+        "MAE": np.mean(mae_list),
+        "RMSE": np.mean(rmse_list),
+        "R2": np.mean(r2_list),
+        "duracion_segundos": round(duracion, 2)
+    })
 
 # -----------------------------
-# Resultados
+# TPOT por separado
+# -----------------------------
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+inicio = time.time()
+tpot = TPOTRegressor(generations=5, population_size=20, random_state=42)
+tpot.fit(X_train, y_train)
+duracion = time.time() - inicio
+
+best_model = tpot.fitted_pipeline_
+y_pred = best_model.predict(X_test)
+
+joblib.dump(best_model, RUTA_MODELOS / "TPOT.joblib")
+
+resultados.append({
+    "modelo": "TPOT",
+    "MAE": mean_absolute_error(y_test, y_pred),
+    "RMSE": np.sqrt(mean_squared_error(y_test, y_pred)),
+    "R2": r2_score(y_test, y_pred),
+    "duracion_segundos": round(duracion, 2)
+})
+
+# -----------------------------
+# Guardar resultados
 # -----------------------------
 df_resultados = pd.DataFrame(resultados)
 df_resultados.sort_values(by="R2", ascending=False, inplace=True)
-
 print("\n Resultados de evaluación:")
 print(df_resultados.round(4))
 
-# Guardar en CSV
 df_resultados.to_csv(RUTA_MODELOS / "resultados_modelos.csv", index=False)
 
