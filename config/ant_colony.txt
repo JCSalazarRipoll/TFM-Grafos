@@ -1,4 +1,4 @@
-graphs = {
+asn_graphs = {
     "insecta-ant-colony1-day01": [
         "https://networkrepository.com/insecta-ant-colony1-day01.php",
         "https://nrvis.com/download/data/asn/insecta-ant-colony1-day01.zip"
