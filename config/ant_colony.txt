@@ -44,3 +44,187 @@ grafos_zip = [
     "https://nrvis.com/download/data/asn/insecta-ant-colony6-day10.zip",
     "https://nrvis.com/download/data/asn/insecta-ant-colony6-day12.zip",
 ]
+
+ant_colony_graphs = {
+    "insecta-ant-colony1-day01": [
+        "https://networkrepository.com/insecta-ant-colony1-day01.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day01.zip"
+    ],
+    "insecta-ant-colony1-day02": [
+        "https://networkrepository.com/insecta-ant-colony1-day02.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day02.zip"
+    ],
+    "insecta-ant-colony1-day03": [
+        "https://networkrepository.com/insecta-ant-colony1-day03.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day03.zip"
+    ],
+    "insecta-ant-colony1-day04": [
+        "https://networkrepository.com/insecta-ant-colony1-day04.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day04.zip"
+    ],
+    "insecta-ant-colony1-day05": [
+        "https://networkrepository.com/insecta-ant-colony1-day05.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day05.zip"
+    ],
+    "insecta-ant-colony1-day06": [
+        "https://networkrepository.com/insecta-ant-colony1-day06.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day06.zip"
+    ],
+    "insecta-ant-colony1-day07": [
+        "https://networkrepository.com/insecta-ant-colony1-day07.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day07.zip"
+    ],
+    "insecta-ant-colony1-day08": [
+        "https://networkrepository.com/insecta-ant-colony1-day08.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day08.zip"
+    ],
+    "insecta-ant-colony1-day09": [
+        "https://networkrepository.com/insecta-ant-colony1-day09.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day09.zip"
+    ],
+    "insecta-ant-colony1-day10": [
+        "https://networkrepository.com/insecta-ant-colony1-day10.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day10.zip"
+    ],
+    "insecta-ant-colony1-day11": [
+        "https://networkrepository.com/insecta-ant-colony1-day11.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day11.zip"
+    ],
+    "insecta-ant-colony1-day12": [
+        "https://networkrepository.com/insecta-ant-colony1-day12.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony1-day12.zip"
+    ],
+    "insecta-ant-colony2-day01": [
+        "https://networkrepository.com/insecta-ant-colony2-day01.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony2-day01.zip"
+    ],
+    "insecta-ant-colony2-day02": [
+        "https://networkrepository.com/insecta-ant-colony2-day02.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony2-day02.zip"
+    ],
+    "insecta-ant-colony2-day03": [
+        "https://networkrepository.com/insecta-ant-colony2-day03.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony2-day03.zip"
+    ],
+    "insecta-ant-colony2-day04": [
+        "https://networkrepository.com/insecta-ant-colony2-day04.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony2-day04.zip"
+    ],
+    "insecta-ant-colony2-day05": [
+        "https://networkrepository.com/insecta-ant-colony2-day05.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony2-day05.zip"
+    ],
+    "insecta-ant-colony2-day06": [
+        "https://networkrepository.com/insecta-ant-colony2-day06.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony2-day06.zip"
+    ],
+    "insecta-ant-colony2-day07": [
+        "https://networkrepository.com/insecta-ant-colony2-day07.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony2-day07.zip"
+    ],
+    "insecta-ant-colony2-day08": [
+        "https://networkrepository.com/insecta-ant-colony2-day08.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony2-day08.zip"
+    ],
+    "insecta-ant-colony3-day01": [
+        "https://networkrepository.com/insecta-ant-colony3-day01.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day01.zip"
+    ],
+    "insecta-ant-colony3-day02": [
+        "https://networkrepository.com/insecta-ant-colony3-day02.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day02.zip"
+    ],
+    "insecta-ant-colony3-day03": [
+        "https://networkrepository.com/insecta-ant-colony3-day03.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day03.zip"
+    ],
+    "insecta-ant-colony3-day04": [
+        "https://networkrepository.com/insecta-ant-colony3-day04.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day04.zip"
+    ],
+    "insecta-ant-colony3-day05": [
+        "https://networkrepository.com/insecta-ant-colony3-day05.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day05.zip"
+    ],
+    "insecta-ant-colony3-day06": [
+        "https://networkrepository.com/insecta-ant-colony3-day06.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day06.zip"
+    ],
+    "insecta-ant-colony3-day07": [
+        "https://networkrepository.com/insecta-ant-colony3-day07.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day07.zip"
+    ],
+    "insecta-ant-colony3-day09": [
+        "https://networkrepository.com/insecta-ant-colony3-day09.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day09.zip"
+    ],
+    "insecta-ant-colony3-day10": [
+        "https://networkrepository.com/insecta-ant-colony3-day10.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day10.zip"
+    ],
+    "insecta-ant-colony3-day11": [
+        "https://networkrepository.com/insecta-ant-colony3-day11.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony3-day11.zip"
+    ],
+    "insecta-ant-colony5-day01": [
+        "https://networkrepository.com/insecta-ant-colony5-day01.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony5-day01.zip"
+    ],
+    "insecta-ant-colony5-day02": [
+        "https://networkrepository.com/insecta-ant-colony5-day02.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony5-day02.zip"
+    ],
+    "insecta-ant-colony5-day11": [
+        "https://networkrepository.com/insecta-ant-colony5-day11.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony5-day11.zip"
+    ],
+    "insecta-ant-colony6-day01": [
+        "https://networkrepository.com/insecta-ant-colony6-day01.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day01.zip"
+    ],
+    "insecta-ant-colony6-day02": [
+        "https://networkrepository.com/insecta-ant-colony6-day02.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day02.zip"
+    ],
+    "insecta-ant-colony6-day03": [
+        "https://networkrepository.com/insecta-ant-colony6-day03.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day03.zip"
+    ],
+    "insecta-ant-colony6-day04": [
+        "https://networkrepository.com/insecta-ant-colony6-day04.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day04.zip"
+    ],
+    "insecta-ant-colony6-day05": [
+        "https://networkrepository.com/insecta-ant-colony6-day05.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day05.zip"
+    ],
+    "insecta-ant-colony6-day06": [
+        "https://networkrepository.com/insecta-ant-colony6-day06.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day06.zip"
+    ],
+    "insecta-ant-colony6-day07": [
+        "https://networkrepository.com/insecta-ant-colony6-day07.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day07.zip"
+    ],
+    "insecta-ant-colony6-day08": [
+        "https://networkrepository.com/insecta-ant-colony6-day08.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day08.zip"
+    ],
+    "insecta-ant-colony6-day09": [
+        "https://networkrepository.com/insecta-ant-colony6-day09.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day09.zip"
+    ],
+    "insecta-ant-colony6-day10": [
+        "https://networkrepository.com/insecta-ant-colony6-day10.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day10.zip"
+    ],
+    "insecta-ant-colony6-day12": [
+        "https://networkrepository.com/insecta-ant-colony6-day12.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day12.zip"
+    ],
+    "insecta-ant-colony6-day06": [
+        "https://networkrepository.com/insecta-ant-colony6-day06.php",
+        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day06.zip"
+    ]
+}
+
