@@ -24,23 +24,6 @@ def descargar_y_descomprimir(nombre, url, carpeta_descarga="data/grafos_medianos
 
     return destino_dir
 
-grafos_masivos = {
-    "soc-flickr": "https://nrvis.com/download/data/soc/soc-flickr.zip",
-    "soc-livejournal": "https://nrvis.com/download/data/soc/soc-livejournal.zip",
-    "soc-pokec": "https://nrvis.com/download/data/soc/soc-pokec.zip"
-}
-
-if __name__ == "__main__":
-    for nombre, url in grafos_masivos.items():
-        ruta_final = descargar_y_descomprimir(nombre, url)
-        print(f"Grafo listo: {ruta_final}")
-
-
- 
- 
- 
-
-
 # -----------------------------
 # Configuración de rutas
 # -----------------------------
