@@ -1,6 +1,6 @@
 import os, requests
 from pathlib import Path
-
+import zipfile
 
 def descargar_y_descomprimir(nombre, url, carpeta_descarga="data/grafos_medianos"):
     os.makedirs(carpeta_descarga, exist_ok=True)
