@@ -1,0 +1,6 @@
+tscc_graphs = {
+    "scc-infect-hyper": [
+        "https://networkrepository.com/scc-infect-hyper.php",
+        "https://nrvis.com/download/data/tscc/scc-infect-hyper.zip"
+    ]
+}
