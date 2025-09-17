@@ -1,28 +1,6 @@
-import os, requests
+import requests, re, csv
 from pathlib import Path
-import zipfile
-
-def descargar_y_descomprimir(nombre, url, carpeta_descarga="data/grafos_medianos"):
-    os.makedirs(carpeta_descarga, exist_ok=True)
-    zip_path = os.path.join(carpeta_descarga, f"{nombre}.zip")
-    destino_dir = os.path.join(carpeta_descarga, f"{nombre}_descomprimido")
-
-    if not os.path.exists(zip_path):
-        print(f"Descargando {nombre}...")
-        r = requests.get(url)
-        with open(zip_path, 'wb') as f:
-            f.write(r.content)
-    else:
-        print(f"Ya descargado: {zip_path}")
-
-    if not os.path.exists(destino_dir):
-        print(f"Descomprimiendo en: {destino_dir}")
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(destino_dir)
-    else:
-        print(f"Ya descomprimido: {destino_dir}")
-
-    return destino_dir
+from bs4 import BeautifulSoup
 
 # -----------------------------
 # Configuración de rutas
@@ -30,38 +8,113 @@ def descargar_y_descomprimir(nombre, url, carpeta_descarga="data/grafos_medianos
 RUTA_CONFIG = Path("config/")
 RUTA_DESTINO = Path("data/grafos_medianos/")
 RUTA_DESTINO.mkdir(parents=True, exist_ok=True)
+RUTA_SALIDA = Path("data/metadata/descargas_etapa2.csv")
+RUTA_SALIDA.parent.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------
-# Función para descargar un .zip
+# Funciones auxiliares
 # -----------------------------
-def descargar_zip(url, destino):
-    nombre = url.split("/")[-1]
-    descargar_y_descomprimir(nombre, url)
+def normalizar_valor(valor: str) -> float:
+    valor = valor.replace(",", "")
+    if valor.endswith("K"):
+        return float(valor[:-1]) * 1_000
+    elif valor.endswith("M"):
+        return float(valor[:-1]) * 1_000_000
+    else:
+        return float(valor)
+
+def estadisticas_completas(estadisticas: dict) -> bool:
+    METRICAS_ESPERADAS = [
+        "Nodes", "Edges", "Density", "Maximum degree", "Minimum degree",
+        "Average degree", "Assortativity", "Number of triangles",
+        "Average number of triangles", "Maximum number of triangles",
+        "Average clustering coefficient", "Fraction of closed triangles",
+        "Maximum k-core", "Lower bound of Maximum Clique"
+    ]
+    return all(m in estadisticas for m in METRICAS_ESPERADAS)
+
+def extraer_estadisticas_red(url_php):
+    headers = {
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "text/html"
+    }
+    response = requests.get(url_php, headers=headers, timeout=10)
+    response.raise_for_status()
+    soup = BeautifulSoup(response.text, "html.parser")
+    text = soup.get_text(separator="\n")
+    stats_text = text[text.find("Network Data Statistics"):text.find("Network Data Statistics")+1000]
+
+    patrones = {
+        "Nodes": r"Nodes\s+([0-9\.KM]+)",
+        "Edges": r"Edges\s+([0-9\.KM]+)",
+        "Density": r"Density\s+([0-9\.]+)",
+        "Maximum degree": r"Maximum degree\s+([0-9\.K]+)",
+        "Minimum degree": r"Minimum degree\s+([0-9]+)",
+        "Average degree": r"Average degree\s+([0-9\.]+)",
+        "Assortativity": r"Assortativity\s+([\-0-9\.]+)",
+        "Number of triangles": r"Number of triangles\s+([0-9\.KM]+)",
+        "Average number of triangles": r"Average number of triangles\s+([0-9\.]+)",
+        "Maximum number of triangles": r"Maximum number of triangles\s+([0-9\.KM]+)",
+        "Average clustering coefficient": r"Average clustering coefficient\s+([0-9\.]+)",
+        "Fraction of closed triangles": r"Fraction of closed triangles\s+([0-9\.]+)",
+        "Maximum k-core": r"Maximum k-core\s+([0-9]+)",
+        "Lower bound of Maximum Clique": r"Lower bound of Maximum Clique\s+([0-9]+)"
+    }
+
+    return {
+        k: normalizar_valor(re.search(v, stats_text).group(1)) for k, v in patrones.items() if re.search(v, stats_text)
+    }
+
+def descargar_zip(url_zip, destino):
+    nombre = url_zip.split("/")[-1]
+    ruta = destino / nombre
+    if ruta.exists():
+        print(f"✅ Ya existe: {nombre}")
+        return True
+    try:
+        print(f"⬇️ Descargando: {nombre}")
+        response = requests.get(url_zip, timeout=30)
+        response.raise_for_status()
+        with open(ruta, "wb") as f:
+            f.write(response.content)
+        return True
+    except Exception as e:
+        print(f"❌ Error al descargar {nombre}: {e}")
+        return False
 
 # -----------------------------
 # Proceso principal
 # -----------------------------
-descargados = []
+with open(RUTA_SALIDA, "w", newline="", encoding="utf-8") as f_out:
+    writer = None
 
-for archivo_txt in RUTA_CONFIG.glob("*.txt"):
-    print(f"\n Procesando archivo: {archivo_txt.name}")
-    with open(archivo_txt, "r", encoding="utf-8") as f:
-        for linea in f:
-            if "http" in linea and ".zip" in linea:
-                url = linea.strip().strip(',').strip('"').strip("'")
-                print(url)
-                if url.startswith("http") and url.endswith(".zip"):
-                    nombre = descargar_zip(url, RUTA_DESTINO)
-                    if nombre:
-                        descargados.append(nombre)
+    for archivo_txt in RUTA_CONFIG.glob("*.txt"):
+        print(f"\n📄 Procesando: {archivo_txt.name}")
+        with open(archivo_txt, "r", encoding="utf-8") as f_in:
+            for linea in f_in:
+                if "http" not in linea or ".zip" not in linea:
+                    continue
 
-# -----------------------------
-# Registro de descargas
-# -----------------------------
-if descargados:
-    with open(RUTA_DESTINO / "descargas_registradas.txt", "w", encoding="utf-8") as f:
-        for nombre in descargados:
-            f.write(nombre + "\n")
-    print(f"\n📁 Se registraron {len(descargados)} descargas en descargas_registradas.txt")
-else:
-    print("\n⚠️ No se descargó ningún archivo nuevo.")
+                url_zip = linea.strip().strip(",").strip('"').strip("'")
+                nombre_base = url_zip.split("/")[-1].replace(".zip", "")
+                url_php = f"https://networkrepository.com/{nombre_base.replace('_', '-')}.php"
+
+                descargado = descargar_zip(url_zip, RUTA_DESTINO)
+                try:
+                    estadisticas = extraer_estadisticas_red(url_php)
+                except Exception as e:
+                    estadisticas = {}
+                    print(f"⚠️ Error al extraer estadísticas de {url_php}: {e}")
+
+                fila = {
+                    "nombre": nombre_base,
+                    "url_zip": url_zip,
+                    "url_php": url_php,
+                    "descargado": descargado,
+                    **estadisticas
+                }
+
+                if writer is None:
+                    writer = csv.DictWriter(f_out, fieldnames=fila.keys())
+                    writer.writeheader()
+                writer.writerow(fila)
