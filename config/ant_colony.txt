@@ -170,14 +170,6 @@ asn_graphs = {
     "insecta-ant-colony6-day10": [
         "https://networkrepository.com/insecta-ant-colony6-day10.php",
         "https://nrvis.com/download/data/asn/insecta-ant-colony6-day10.zip"
-    ],
-    "insecta-ant-colony6-day12": [
-        "https://networkrepository.com/insecta-ant-colony6-day12.php",
-        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day12.zip"
-    ],
-    "insecta-ant-colony6-day06": [
-        "https://networkrepository.com/insecta-ant-colony6-day06.php",
-        "https://nrvis.com/download/data/asn/insecta-ant-colony6-day06.zip"
     ]
 }
 
