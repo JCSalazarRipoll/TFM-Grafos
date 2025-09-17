@@ -105,7 +105,7 @@ def descargar_zip(url_zip, destino):
 
 def cargar_grafo(path):
     with open(path, 'r') as f:
-        lines = [line for line in f if not line.startswith('%') and line.strip()]
+        lines = [line for line in f if not line.strip().startswith('%') and line.strip()]
     columnas = [line.strip().split() for line in lines]
 
     edges = []
@@ -119,6 +119,7 @@ def cargar_grafo(path):
     G = nx.Graph()
     G.add_edges_from(edges)
     return G
+
 
 
 def calcular_aspl(path_grafo):
