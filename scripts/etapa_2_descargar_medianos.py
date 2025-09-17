@@ -172,6 +172,10 @@ def reparar_aspl_en_csv(csv_path, zip_folder, output_csv):
 
     df_final = pd.DataFrame(filas_actualizadas)
     df_final.to_csv(output_csv, index=False)
+    end = time.perf_counter()
+    print(f"Reparación completada en {end - start:.2f} segundos")
+    print(f"Total de grafos procesados: {len(df_final)}")
+
 
 if __name__ == "__main__":
     reparar_aspl_en_csv(
@@ -181,6 +185,4 @@ if __name__ == "__main__":
     )
 
 
-    end = time.perf_counter()
-    print(f"Reparación completada en {end - start:.2f} segundos")
-    print(f"Total de grafos procesados: {len(df_final)}")
+    
