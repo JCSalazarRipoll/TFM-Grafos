@@ -1,8 +1,14 @@
-#etapa_1_descarga_masivos.py
-import os
+# -----------------------------
+# Descargar librerías
+# -----------------------------
+# Librerías estándar
+import os, zipfile
+# Librería externa
 import requests
-import zipfile
 
+# -----------------------------
+# Funciones auxiliares
+# -----------------------------
 def descargar_y_descomprimir(nombre, url, carpeta_descarga="data/grafos_masivos"):
     os.makedirs(carpeta_descarga, exist_ok=True)
     zip_path = os.path.join(carpeta_descarga, f"{nombre}.zip")
@@ -25,6 +31,9 @@ def descargar_y_descomprimir(nombre, url, carpeta_descarga="data/grafos_masivos"
 
     return destino_dir
 
+# -----------------------------
+# Datos Grafos Masivos
+# -----------------------------
 grafos_masivos = {
     "soc-flickr": "https://nrvis.com/download/data/soc/soc-flickr.zip",
     "soc-livejournal": "https://nrvis.com/download/data/soc/soc-livejournal.zip",
