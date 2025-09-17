@@ -1,6 +1,11 @@
 import requests, re, csv
 from pathlib import Path
 from bs4 import BeautifulSoup
+import os
+import zipfile
+import time
+import pandas as pd
+import networkx as nx
 
 # -----------------------------
 # Configuración de rutas
@@ -91,9 +96,57 @@ def descargar_zip(url_zip, destino):
         print(f"Error al descargar {nombre}: {e}")
         return False
 
+def calculate_aspl(graph_path):
+    G = nx.read_edgelist(graph_path, nodetype=int)
+    if nx.is_connected(G):
+        return nx.average_shortest_path_length(G)
+    else:
+        components = list(nx.connected_components(G))
+        total_nodes = sum(len(c) for c in components if len(c) > 1)
+        weighted_sum = 0
+        for c in components:
+            if len(c) > 1:
+                subgraph = G.subgraph(c)
+                l = nx.average_shortest_path_length(subgraph)
+                weighted_sum += len(c) * l
+        return weighted_sum / total_nodes if total_nodes > 0 else None
+
+def update_csv_with_aspl(csv_path, zip_folder, output_csv):
+    df = pd.read_csv(csv_path)
+    aspl_values = []
+    start = time.perf_counter()
+
+    for nombre in df['nombre']:
+        zip_path = os.path.join(zip_folder, nombre)
+        aspl = None
+
+        try:
+            with zipfile.ZipFile(zip_path, 'r') as z:
+                for name in z.namelist():
+                    if name.endswith(('.mtx', '.edges', '.graph')):
+                        z.extract(name, path="temp_graph")
+                        graph_path = os.path.join("temp_graph", name)
+                        aspl = calculate_aspl(graph_path)
+                        os.remove(graph_path)
+                        break
+        except Exception as e:
+            aspl = f"Error: {e}"
+
+        aspl_values.append(aspl)
+
+    df['ASPL'] = aspl_values
+    df.to_csv(output_csv, index=False)
+
+    end = time.perf_counter()
+    total_time = end - start
+    print(f"Tiempo total de procesamiento: {total_time:.2f} segundos")
+
+
 # -----------------------------
 # Proceso principal
 # -----------------------------
+
+inicio = time.perf_counter()
 with open(RUTA_SALIDA, "w", newline="", encoding="utf-8") as f_out:
     writer = None
 
@@ -115,6 +168,20 @@ with open(RUTA_SALIDA, "w", newline="", encoding="utf-8") as f_out:
                     estadisticas = {}
                     print(f"Error al extraer estadísticas de {url_php}: {e}")
 
+                aspl = None
+                ruta_zip = RUTA_DESTINO / f"{nombre_base}.zip"
+                try:
+                    with zipfile.ZipFile(ruta_zip, 'r') as z:
+                        for archivo in z.namelist():
+                            if archivo.endswith(('.mtx', '.edges', '.graph')):
+                                z.extract(archivo, path="temp_graph")
+                                ruta_grafo = os.path.join("temp_graph", archivo)
+                                aspl = calculate_aspl(ruta_grafo)
+                                os.remove(ruta_grafo)
+                                break
+                except Exception as e:
+                    aspl = f"Error: {e}"
+
                 fila = {
                     "nombre": nombre_base,
                     "url_zip": url_zip,
@@ -123,7 +190,11 @@ with open(RUTA_SALIDA, "w", newline="", encoding="utf-8") as f_out:
                     **estadisticas
                 }
 
+                fila["ASPL"] = aspl
+                
                 if writer is None:
                     writer = csv.DictWriter(f_out, fieldnames=fila.keys())
                     writer.writeheader()
                 writer.writerow(fila)
+fin = time.perf_counter()
+print(f"\n⏱️ Tiempo total de etapa 2 (con ASPL): {fin - inicio:.2f} segundos")
