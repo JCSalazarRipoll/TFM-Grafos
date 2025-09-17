@@ -98,7 +98,7 @@ with open(RUTA_SALIDA, "w", newline="", encoding="utf-8") as f_out:
     writer = None
 
     for archivo_txt in RUTA_CONFIG.glob("*.txt"):
-        print(f"\n📄 Procesando: {archivo_txt.name}")
+        print(f"\n Procesando: {archivo_txt.name}")
         with open(archivo_txt, "r", encoding="utf-8") as f_in:
             for linea in f_in:
                 if "http" not in linea or ".zip" not in linea:
