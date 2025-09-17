@@ -1,9 +1,10 @@
-import requests, re, csv
+# Librerías estándar
+import os, re, csv, time, zipfile
 from pathlib import Path
+
+# Librerías externas
+import requests
 from bs4 import BeautifulSoup
-import os
-import zipfile
-import time
 import pandas as pd
 import networkx as nx
 
@@ -56,7 +57,10 @@ def extraer_estadisticas_red(url_php):
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
     text = soup.get_text(separator="\n")
-    stats_text = text[text.find("Network Data Statistics"):text.find("Network Data Statistics")+1000]
+    stats_section = soup.find(text=re.compile("Network Data Statistics"))
+    if not stats_section:
+        return {}
+    stats_text = stats_section.parent.get_text(separator="\n")
 
     patrones = {
         "Nodes": r"Nodes\s+([0-9\.KM]+)",
@@ -75,9 +79,12 @@ def extraer_estadisticas_red(url_php):
         "Lower bound of Maximum Clique": r"Lower bound of Maximum Clique\s+([0-9]+)"
     }
 
-    return {
-        k: normalizar_valor(re.search(v, stats_text).group(1)) for k, v in patrones.items() if re.search(v, stats_text)
-    }
+    resultados = {}
+    for k, patron in patrones.items():
+        match = re.search(patron, stats_text)
+        if match:
+            resultados[k] = normalizar_valor(match.group(1))
+    return resultados    
 
 def descargar_zip(url_zip, destino):
     nombre = url_zip.split("/")[-1]
@@ -97,46 +104,47 @@ def descargar_zip(url_zip, destino):
         return False
 
 def cargar_grafo(path):
-    edges = []
     with open(path, 'r') as f:
-        for line in f:
-            if line.startswith('%') or line.strip() == "":
-                continue
-            parts = line.strip().split()
-            if len(parts) == 2:
-                try:
-                    edges.append((int(parts[0]), int(parts[1])))
-                except ValueError:
-                    continue  # Ignora líneas con datos no numéricos
+        lines = [line for line in f if not line.startswith('%') and line.strip()]
+    columnas = [line.strip().split() for line in lines]
+
+    edges = []
+    for c in columnas:
+        if len(c) >= 2:
+            try:
+                edges.append((int(c[0]), int(c[1])))
+            except ValueError:
+                continue  # Ignora líneas mal formateadas
+    
     G = nx.Graph()
     G.add_edges_from(edges)
     return G
 
 
-def calculate_aspl(path_grafo):
+def calcular_aspl(path_grafo):
     G = cargar_grafo(path_grafo)
-    if nx.is_connected(G):
-        return nx.average_shortest_path_length(G)
-    else:
-        componentes = list(nx.connected_components(G))
-        total_nodos = sum(len(c) for c in componentes if len(c) > 1)
-        suma_ponderada = 0
-        for c in componentes:
-            if len(c) > 1:
-                subgrafo = G.subgraph(c)
-                l = nx.average_shortest_path_length(subgrafo)
-                suma_ponderada += len(c) * l
-        return suma_ponderada / total_nodos if total_nodos > 0 else None
+    if G.number_of_nodes() == 0 or G.number_of_edges() == 0:
+        return None  # grafo vacío
+    if not nx.is_connected(G):
+        return None  # grafo no conexo
+    return nx.average_shortest_path_length(G)
 
-
-def update_csv_with_aspl(csv_path, zip_folder, output_csv):
+def reparar_aspl_en_csv(csv_path, zip_folder, output_csv):
     df = pd.read_csv(csv_path)
-    aspl_values = []
+    filas_actualizadas = []
     start = time.perf_counter()
 
-    for nombre in df['nombre']:
+    for _, row in df.iterrows():
+        nombre = row['nombre']
+        aspl_actual = row.get('ASPL', None)
+
+        # Verifica si el ASPL es válido (float)
+        if isinstance(aspl_actual, float) and not pd.isna(aspl_actual):
+            filas_actualizadas.append(row)
+            continue  # No necesita reparación
+
         zip_path = os.path.join(zip_folder, nombre)
-        aspl = None
+        aspl_nuevo = None
 
         try:
             with zipfile.ZipFile(zip_path, 'r') as z:
@@ -144,75 +152,26 @@ def update_csv_with_aspl(csv_path, zip_folder, output_csv):
                     if name.endswith(('.mtx', '.edges', '.graph')):
                         z.extract(name, path="temp_graph")
                         graph_path = os.path.join("temp_graph", name)
-                        aspl = calculate_aspl(graph_path)
+                        aspl_nuevo = calcular_aspl(graph_path)
                         os.remove(graph_path)
                         break
         except Exception as e:
-            aspl = f"Error: {e}"
+            print(f"Error al procesar {nombre}: {e}")
+            filas_actualizadas.append(row)
+            continue
 
-        aspl_values.append(aspl)
+        if isinstance(aspl_nuevo, float):
+            fila = row.copy()
+            fila['ASPL'] = aspl_nuevo
+            filas_actualizadas.append(fila)
+            print(f"ASPL reparado para: {nombre}")
+        else:
+            print(f"No se pudo reparar ASPL para: {nombre}")
+            filas_actualizadas.append(row)
 
-    df['ASPL'] = aspl_values
-    df.to_csv(output_csv, index=False)
+    df_final = pd.DataFrame(filas_actualizadas)
+    df_final.to_csv(output_csv, index=False)
 
     end = time.perf_counter()
-    total_time = end - start
-    print(f"Tiempo total de procesamiento: {total_time:.2f} segundos")
-
-
-# -----------------------------
-# Proceso principal
-# -----------------------------
-
-inicio = time.perf_counter()
-with open(RUTA_SALIDA, "w", newline="", encoding="utf-8") as f_out:
-    writer = None
-
-    for archivo_txt in RUTA_CONFIG.glob("*.txt"):
-        print(f"\n Procesando: {archivo_txt.name}")
-        with open(archivo_txt, "r", encoding="utf-8") as f_in:
-            for linea in f_in:
-                if "http" not in linea or ".zip" not in linea:
-                    continue
-
-                url_zip = linea.strip().strip(",").strip('"').strip("'")
-                nombre_base = url_zip.split("/")[-1].replace(".zip", "")
-                url_php = f"https://networkrepository.com/{nombre_base.replace('_', '-')}.php"
-
-                descargado = descargar_zip(url_zip, RUTA_DESTINO)
-                try:
-                    estadisticas = extraer_estadisticas_red(url_php)
-                except Exception as e:
-                    estadisticas = {}
-                    print(f"Error al extraer estadísticas de {url_php}: {e}")
-
-                aspl = None
-                ruta_zip = RUTA_DESTINO / f"{nombre_base}.zip"
-                try:
-                    with zipfile.ZipFile(ruta_zip, 'r') as z:
-                        for archivo in z.namelist():
-                            if archivo.endswith(('.mtx', '.edges', '.graph')):
-                                z.extract(archivo, path="temp_graph")
-                                ruta_grafo = os.path.join("temp_graph", archivo)
-                                aspl = calculate_aspl(ruta_grafo)
-                                os.remove(ruta_grafo)
-                                break
-                except Exception as e:
-                    aspl = f"Error: {e}"
-
-                fila = {
-                    "nombre": nombre_base,
-                    "url_zip": url_zip,
-                    "url_php": url_php,
-                    "descargado": descargado,
-                    **estadisticas
-                }
-
-                fila["ASPL"] = aspl
-                
-                if writer is None:
-                    writer = csv.DictWriter(f_out, fieldnames=fila.keys())
-                    writer.writeheader()
-                writer.writerow(fila)
-fin = time.perf_counter()
-print(f"\n⏱️ Tiempo total de etapa 2 (con ASPL): {fin - inicio:.2f} segundos")
+    print(f"Reparación completada en {end - start:.2f} segundos")
+    print(f"Total de grafos procesados: {len(df_final)}")
