@@ -1,0 +1,58 @@
+socfb_graphs = {
+    "socfb-nips-ego": [
+        "https://networkrepository.com/socfb-nips-ego.php",
+        "https://nrvis.com/download/data/socfb/socfb-nips-ego.zip"
+    ],
+    "socfb-Reed98": [
+        "https://networkrepository.com/socfb-Reed98.php",
+        "https://nrvis.com/download/data/socfb/socfb-Reed98.zip"
+    ],
+    "socfb-Haverford76": [
+        "https://networkrepository.com/socfb-Haverford76.php",
+        "https://nrvis.com/download/data/socfb/socfb-Haverford76.zip"
+    ],
+    "socfb-Oberlin44": [
+        "https://networkrepository.com/socfb-Oberlin44.php",
+        "https://nrvis.com/download/data/socfb/socfb-Oberlin44.zip"
+    ],
+    "socfb-Amherst41": [
+        "https://networkrepository.com/socfb-Amherst41.php",
+        "https://nrvis.com/download/data/socfb/socfb-Amherst41.zip"
+    ],
+    "socfb-Wellesley22": [
+        "https://networkrepository.com/socfb-Wellesley22.php",
+        "https://nrvis.com/download/data/socfb/socfb-Wellesley22.zip"
+    ],
+    "socfb-Smith60": [
+        "https://networkrepository.com/socfb-Smith60.php",
+        "https://nrvis.com/download/data/socfb/socfb-Smith60.zip"
+    ],
+    "socfb-Trinity100": [
+        "https://networkrepository.com/socfb-Trinity100.php",
+        "https://nrvis.com/download/data/socfb/socfb-Trinity100.zip"
+    ],
+    "socfb-Vassar85": [
+        "https://networkrepository.com/socfb-Vassar85.php",
+        "https://nrvis.com/download/data/socfb/socfb-Vassar85.zip"
+    ],
+    "socfb-Santa74": [
+        "https://networkrepository.com/socfb-Santa74.php",
+        "https://nrvis.com/download/data/socfb/socfb-Santa74.zip"
+    ],
+    "socfb-Colgate88": [
+        "https://networkrepository.com/socfb-Colgate88.php",
+        "https://nrvis.com/download/data/socfb/socfb-Colgate88.zip"
+    ],
+    "socfb-Howard90": [
+        "https://networkrepository.com/socfb-Howard90.php",
+        "https://nrvis.com/download/data/socfb/socfb-Howard90.zip"
+    ],
+    "socfb-CMU": [
+        "https://networkrepository.com/socfb-CMU.php",
+        "https://nrvis.com/download/data/socfb/socfb-CMU.zip"
+    ],
+    "socfb-MIT": [
+        "https://networkrepository.com/socfb-MIT.php",
+        "https://nrvis.com/download/data/socfb/socfb-MIT.zip"
+    ]
+}
