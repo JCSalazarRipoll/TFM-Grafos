@@ -97,11 +97,10 @@ def descargar_zip(url_zip, destino):
         return False
 
 def cargar_grafo(path):
-    if path.endswith(".mtx"):
-        # Ignora cabecera MatrixMarket y carga como lista de aristas
-        return nx.read_edgelist(path, comments="%", nodetype=int)
-    else:
-        return nx.read_edgelist(path, nodetype=int)
+    with open(path, 'r') as f:
+        lines = [line for line in f if len(line.strip().split()) == 2]
+    return nx.parse_edgelist(lines, nodetype=int)
+
 
 def calculate_aspl(path_grafo):
     G = cargar_grafo(path_grafo)
