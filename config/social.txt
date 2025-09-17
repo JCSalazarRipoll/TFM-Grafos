@@ -1,0 +1,10 @@
+soc_graphs = {
+    "soc-anybeat": [
+        "https://networkrepository.com/soc-anybeat.php",
+        "https://nrvis.com/download/data/soc/soc-anybeat.zip"
+    ],
+    "soc-wiki-Vote": [
+        "https://networkrepository.com/soc-wiki-Vote.php",
+        "https://nrvis.com/download/data/soc/soc-wiki-Vote.zip"
+    ]
+}
