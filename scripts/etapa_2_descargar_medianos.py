@@ -78,17 +78,17 @@ def descargar_zip(url_zip, destino):
     nombre = url_zip.split("/")[-1]
     ruta = destino / nombre
     if ruta.exists():
-        print(f"✅ Ya existe: {nombre}")
+        print(f"Ya existe: {nombre}")
         return True
     try:
-        print(f"⬇️ Descargando: {nombre}")
+        print(f"Descargando: {nombre}")
         response = requests.get(url_zip, timeout=30)
         response.raise_for_status()
         with open(ruta, "wb") as f:
             f.write(response.content)
         return True
     except Exception as e:
-        print(f"❌ Error al descargar {nombre}: {e}")
+        print(f"Error al descargar {nombre}: {e}")
         return False
 
 # -----------------------------
@@ -113,7 +113,7 @@ with open(RUTA_SALIDA, "w", newline="", encoding="utf-8") as f_out:
                     estadisticas = extraer_estadisticas_red(url_php)
                 except Exception as e:
                     estadisticas = {}
-                    print(f"⚠️ Error al extraer estadísticas de {url_php}: {e}")
+                    print(f"Error al extraer estadísticas de {url_php}: {e}")
 
                 fila = {
                     "nombre": nombre_base,
