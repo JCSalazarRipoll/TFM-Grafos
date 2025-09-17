@@ -1,0 +1,30 @@
+dynamic_graphs = {
+    "insecta-ant-colony5": [
+        "https://networkrepository.com/insecta-ant-colony5.php",
+        "https://nrvis.com/download/data/dynamic/insecta-ant-colony5.zip"
+    ],
+    "insecta-ant-colony3": [
+        "https://networkrepository.com/insecta-ant-colony3.php",
+        "https://nrvis.com/download/data/dynamic/insecta-ant-colony3.zip"
+    ],
+    "insecta-ant-colony2": [
+        "https://networkrepository.com/insecta-ant-colony2.php",
+        "https://nrvis.com/download/data/dynamic/insecta-ant-colony2.zip"
+    ],
+    "insecta-ant-colony1": [
+        "https://networkrepository.com/insecta-ant-colony1.php",
+        "https://nrvis.com/download/data/dynamic/insecta-ant-colony1.zip"
+    ],
+    "ia-frwikinews-user-edits": [
+        "https://networkrepository.com/ia-frwikinews-user-edits.php",
+        "https://nrvis.com/download/data/dynamic/ia-frwikinews-user-edits.zip"
+    ],
+    "ia-movielens-user2tags-10m": [
+        "https://networkrepository.com/ia-movielens-user2tags-10m.php",
+        "https://nrvis.com/download/data/dynamic/ia-movielens-user2tags-10m.zip"
+    ],
+    "ia-radoslaw-email": [
+        "https://networkrepository.com/ia-radoslaw-email.php",
+        "https://nrvis.com/download/data/dynamic/ia-radoslaw-email.zip"
+    ]
+}
