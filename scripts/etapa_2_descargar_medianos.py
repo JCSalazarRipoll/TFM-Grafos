@@ -97,9 +97,20 @@ def descargar_zip(url_zip, destino):
         return False
 
 def cargar_grafo(path):
+    edges = []
     with open(path, 'r') as f:
-        lines = [line for line in f if len(line.strip().split()) == 2]
-    return nx.parse_edgelist(lines, nodetype=int)
+        for line in f:
+            if line.startswith('%') or line.strip() == "":
+                continue
+            parts = line.strip().split()
+            if len(parts) == 2:
+                try:
+                    edges.append((int(parts[0]), int(parts[1])))
+                except ValueError:
+                    continue  # Ignora líneas con datos no numéricos
+    G = nx.Graph()
+    G.add_edges_from(edges)
+    return G
 
 
 def calculate_aspl(path_grafo):
