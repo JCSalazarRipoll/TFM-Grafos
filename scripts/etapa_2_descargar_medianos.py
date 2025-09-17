@@ -96,20 +96,28 @@ def descargar_zip(url_zip, destino):
         print(f"Error al descargar {nombre}: {e}")
         return False
 
-def calculate_aspl(graph_path):
-    G = nx.read_edgelist(graph_path, nodetype=int)
+def cargar_grafo(path):
+    if path.endswith(".mtx"):
+        # Ignora cabecera MatrixMarket y carga como lista de aristas
+        return nx.read_edgelist(path, comments="%", nodetype=int)
+    else:
+        return nx.read_edgelist(path, nodetype=int)
+
+def calcular_aspl(path_grafo):
+    G = cargar_grafo(path_grafo)
     if nx.is_connected(G):
         return nx.average_shortest_path_length(G)
     else:
-        components = list(nx.connected_components(G))
-        total_nodes = sum(len(c) for c in components if len(c) > 1)
-        weighted_sum = 0
-        for c in components:
+        componentes = list(nx.connected_components(G))
+        total_nodos = sum(len(c) for c in componentes if len(c) > 1)
+        suma_ponderada = 0
+        for c in componentes:
             if len(c) > 1:
-                subgraph = G.subgraph(c)
-                l = nx.average_shortest_path_length(subgraph)
-                weighted_sum += len(c) * l
-        return weighted_sum / total_nodes if total_nodes > 0 else None
+                subgrafo = G.subgraph(c)
+                l = nx.average_shortest_path_length(subgrafo)
+                suma_ponderada += len(c) * l
+        return suma_ponderada / total_nodos if total_nodos > 0 else None
+
 
 def update_csv_with_aspl(csv_path, zip_folder, output_csv):
     df = pd.read_csv(csv_path)
