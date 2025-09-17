@@ -103,7 +103,7 @@ def cargar_grafo(path):
     else:
         return nx.read_edgelist(path, nodetype=int)
 
-def calcular_aspl(path_grafo):
+def calculate_aspl(path_grafo):
     G = cargar_grafo(path_grafo)
     if nx.is_connected(G):
         return nx.average_shortest_path_length(G)
