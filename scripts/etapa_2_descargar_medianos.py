@@ -7,6 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import networkx as nx
+import re
 
 # -----------------------------
 # Configuración de rutas
@@ -197,8 +198,6 @@ def extraer_grafos(path):
 def etapa_2_completa(config_path, carpeta_zip, salida_csv):
     registros = []
     start = time.perf_counter()
-
-import re
 
     # Regex que detecta tres bloques separados por espacios o tabulaciones
     patron_linea = re.compile(r'^(\S+)\s+(\S+)\s+(\S+)$')
