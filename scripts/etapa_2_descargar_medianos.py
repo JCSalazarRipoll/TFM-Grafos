@@ -177,21 +177,20 @@ def reparar_aspl_en_csv(csv_path, zip_folder, output_csv):
     print(f"Total de grafos procesados: {len(df_final)}")
 
 
-def leer_grupos_de_tres(path_txt):
-    grupos = []
-    with open(path_txt, 'r') as f:
-        lineas = [line.strip() for line in f if line.strip()]
+def extraer_grafos(path):
+    patron = re.compile(r'^(\S+)\s+(\S+)\s+(\S+)$')
+    grafos = []
 
-    i = 0
-    while i < len(lineas):
-        if '"' in lineas[i]:
-            grupo = lineas[i:i+3]
-            if len(grupo) == 3:
-                grupos.append(grupo)
-            i += 3
-        else:
-            i += 1
-    return grupos
+    with open(path, 'r', encoding='utf-8') as archivo:
+        for linea in archivo:
+            linea = linea.strip()
+            match = patron.match(linea)
+            if match:
+                nombre, url_php, url_zip = match.groups()
+                grafos.append((nombre, url_php, url_zip))
+            else:
+                print(f"Línea ignorada: {linea}")
+    return grafos
 # -----------------------------
 # Funciones principales
 # -----------------------------
@@ -199,17 +198,23 @@ def etapa_2_completa(config_path, carpeta_zip, salida_csv):
     registros = []
     start = time.perf_counter()
 
+import re
+
+    # Regex que detecta tres bloques separados por espacios o tabulaciones
+    patron_linea = re.compile(r'^(\S+)\s+(\S+)\s+(\S+)$')
+    
     with open(config_path, 'r') as f:
         for linea in f:
             if not linea.strip():
                 continue
-
             print(linea.strip())  # Para trazabilidad
-            try:
-                nombre, url_php, url_zip = linea.strip().split('\t')
-            except ValueError:
+    
+            match = patron_linea.match(linea.strip())
+            if not match:
                 print(f"Línea mal formateada: {linea.strip()}")
                 continue
+    
+            nombre, url_php, url_zip = match.groups()
 
             zip_path = carpeta_zip / f"{nombre}.zip"
 
