@@ -1,22 +1,5 @@
-web_graphs = {
-    "web-polblogs": [
-        "https://networkrepository.com/web-polblogs.php",
-        "https://nrvis.com/download/data/web/web-polblogs.zip"
-    ],
-    "web-webbase-2001": [
-        "https://networkrepository.com/web-webbase-2001.php",
-        "https://nrvis.com/download/data/web/web-webbase-2001.zip"
-    ],
-    "web-spam": [
-        "https://networkrepository.com/web-spam.php",
-        "https://nrvis.com/download/data/web/web-spam.zip"
-    ],
-    "web-indochina-2004": [
-        "https://networkrepository.com/web-indochina-2004.php",
-        "https://nrvis.com/download/data/web/web-indochina-2004.zip"
-    ],
-    "web-frwikinews-user-edits": [
-        "https://networkrepository.com/web-frwikinews-user-edits.php",
-        "https://nrvis.com/download/data/web/web-frwikinews-user-edits.zip"
-    ]
-}
+web-polblogs    https://networkrepository.com/web-polblogs.php  https://nrvis.com/download/data/web/web-polblogs.zip
+web-webbase-2001    https://networkrepository.com/web-webbase-2001.php  https://nrvis.com/download/data/web/web-webbase-2001.zip
+web-spam    https://networkrepository.com/web-spam.php  https://nrvis.com/download/data/web/web-spam.zip
+web-indochina-2004  https://networkrepository.com/web-indochina-2004.php    https://nrvis.com/download/data/web/web-indochina-2004.zip
+web-frwikinews-user-edits   https://networkrepository.com/web-frwikinews-user-edits.php https://nrvis.com/download/data/web/web-frwikinews-user-edits.zip
