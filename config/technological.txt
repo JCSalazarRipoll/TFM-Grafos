@@ -1,22 +1,5 @@
-tech_graphs = {
-    "tech-pgp": [
-        "https://networkrepository.com/tech-pgp.php",
-        "https://nrvis.com/download/data/tech/tech-pgp.zip"
-    ],
-    "tech-routers-rf": [
-        "https://networkrepository.com/tech-routers-rf.php",
-        "https://nrvis.com/download/data/tech/tech-routers-rf.zip"
-    ],
-    "tech-WHOIS": [
-        "https://networkrepository.com/tech-WHOIS.php",
-        "https://nrvis.com/download/data/tech/tech-WHOIS.zip"
-    ],
-    "tech-as-caida2007": [
-        "https://networkrepository.com/tech-as-caida2007.php",
-        "https://nrvis.com/download/data/tech/tech-as-caida2007.zip"
-    ],
-    "tech-internet-as": [
-        "https://networkrepository.com/tech-internet-as.php",
-        "https://nrvis.com/download/data/tech/tech-internet-as.zip"
-    ]
-}
+tech-pgp    https://networkrepository.com/tech-pgp.php  https://nrvis.com/download/data/tech/tech-pgp.zip
+tech-routers-rf https://networkrepository.com/tech-routers-rf.php   https://nrvis.com/download/data/tech/tech-routers-rf.zip
+tech-WHOIS  https://networkrepository.com/tech-WHOIS.php    https://nrvis.com/download/data/tech/tech-WHOIS.zip
+tech-as-caida2007   https://networkrepository.com/tech-as-caida2007.php https://nrvis.com/download/data/tech/tech-as-caida2007.zip
+tech-internet-as    https://networkrepository.com/tech-internet-as.php  https://nrvis.com/download/data/tech/tech-internet-as.zip
