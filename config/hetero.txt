@@ -1,26 +1,6 @@
-heter_graphs = {
-    "epinions": [
-        "https://networkrepository.com/epinions.php",
-        "https://nrvis.com/download/data/heter/epinions.zip"
-    ],
-    "actor": [
-        "https://networkrepository.com/actor.php",
-        "https://nrvis.com/download/data/heter/actor.zip"
-    ],
-    "dbpedia": [
-        "https://networkrepository.com/dbpedia.php",
-        "https://nrvis.com/download/data/heter/dbpedia.zip"
-    ],
-    "movielens-10m-noRatings": [
-        "https://networkrepository.com/movielens-10m-noRatings.php",
-        "https://nrvis.com/download/data/heter/movielens-10m-noRatings.zip"
-    ],
-    "digg": [
-        "https://networkrepository.com/digg.php",
-        "https://nrvis.com/download/data/heter/digg.zip"
-    ],
-    "movielens-10m": [
-        "https://networkrepository.com/movielens-10m.php",
-        "https://nrvis.com/download/data/heter/movielens-10m.zip"
-    ]
-}
+epinions    https://networkrepository.com/epinions.php  https://nrvis.com/download/data/heter/epinions.zip
+actor   https://networkrepository.com/actor.php https://nrvis.com/download/data/heter/actor.zip
+dbpedia https://networkrepository.com/dbpedia.php   https://nrvis.com/download/data/heter/dbpedia.zip
+movielens-10m-noRatings https://networkrepository.com/movielens-10m-noRatings.php   https://nrvis.com/download/data/heter/movielens-10m-noRatings.zip
+digg    https://networkrepository.com/digg.php  https://nrvis.com/download/data/heter/digg.zip
+movielens-10m   https://networkrepository.com/movielens-10m.php https://nrvis.com/download/data/heter/movielens-10m.zip
