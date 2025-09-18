@@ -1,26 +1,6 @@
-eco_graphs = {
-    "eco-everglades": [
-        "https://networkrepository.com/eco-everglades.php",
-        "https://nrvis.com/download/data/eco/eco-everglades.zip"
-    ],
-    "eco-florida": [
-        "https://networkrepository.com/eco-florida.php",
-        "https://nrvis.com/download/data/eco/eco-florida.zip"
-    ],
-    "eco-foodweb-baydry": [
-        "https://networkrepository.com/eco-foodweb-baydry.php",
-        "https://nrvis.com/download/data/eco/eco-foodweb-baydry.zip"
-    ],
-    "eco-foodweb-baywet": [
-        "https://networkrepository.com/eco-foodweb-baywet.php",
-        "https://nrvis.com/download/data/eco/eco-foodweb-baywet.zip"
-    ],
-    "eco-mangwet": [
-        "https://networkrepository.com/eco-mangwet.php",
-        "https://nrvis.com/download/data/eco/eco-mangwet.zip"
-    ],
-    "eco-stmarks": [
-        "https://networkrepository.com/eco-stmarks.php",
-        "https://nrvis.com/download/data/eco/eco-stmarks.zip"
-    ]
-}
+eco-everglades  https://networkrepository.com/eco-everglades.php    https://nrvis.com/download/data/eco/eco-everglades.zip
+eco-florida https://networkrepository.com/eco-florida.php   https://nrvis.com/download/data/eco/eco-florida.zip
+eco-foodweb-baydry  https://networkrepository.com/eco-foodweb-baydry.php    https://nrvis.com/download/data/eco/eco-foodweb-baydry.zip
+eco-foodweb-baywet  https://networkrepository.com/eco-foodweb-baywet.php    https://nrvis.com/download/data/eco/eco-foodweb-baywet.zip
+eco-mangwet https://networkrepository.com/eco-mangwet.php   https://nrvis.com/download/data/eco/eco-mangwet.zip
+eco-stmarks https://networkrepository.com/eco-stmarks.php   https://nrvis.com/download/data/eco/eco-stmarks.zip
