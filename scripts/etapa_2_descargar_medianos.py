@@ -18,9 +18,6 @@ RUTA_SALIDA = Path("data/metadata/descargas_etapa2.csv")
 RUTA_SALIDA.parent.mkdir(parents=True, exist_ok=True)
 
 
-
-    
-
 # -----------------------------
 # Funciones auxiliares
 # -----------------------------
@@ -182,6 +179,11 @@ def reparar_aspl_en_csv(csv_path, zip_folder, output_csv):
 # -----------------------------
 # Funciones principales
 # -----------------------------
+import os, time, zipfile
+import pandas as pd
+import networkx as nx
+from pathlib import Path
+
 def etapa_2_completa(config_path, carpeta_zip, salida_csv):
     registros = []
     start = time.perf_counter()
@@ -190,7 +192,14 @@ def etapa_2_completa(config_path, carpeta_zip, salida_csv):
         for linea in f:
             if not linea.strip():
                 continue
-            nombre, url_php, url_zip = linea.strip().split('\t')
+
+            print(linea.strip())  # Para trazabilidad
+            try:
+                nombre, url_php, url_zip = linea.strip().split('\t')
+            except ValueError:
+                print(f"Línea mal formateada: {linea.strip()}")
+                continue
+
             zip_path = carpeta_zip / f"{nombre}.zip"
 
             # Descargar ZIP si no existe
@@ -202,7 +211,7 @@ def etapa_2_completa(config_path, carpeta_zip, salida_csv):
             # Extraer estadísticas desde la web
             estadisticas = extraer_estadisticas_red(url_php)
             if not estadisticas_completas(estadisticas):
-                print(f"Estadísticas incompletas: {nombre}")
+                print(f"⚠️ Estadísticas incompletas: {nombre}")
 
             # Calcular ASPL si es posible
             aspl = None
@@ -218,7 +227,6 @@ def etapa_2_completa(config_path, carpeta_zip, salida_csv):
             except Exception as e:
                 print(f"Error al calcular ASPL para {nombre}: {e}")
 
-            # Registrar todo
             fila = {
                 "nombre": nombre,
                 "url_php": url_php,
@@ -229,13 +237,16 @@ def etapa_2_completa(config_path, carpeta_zip, salida_csv):
             registros.append(fila)
             print(f"Procesado: {nombre}")
 
-    df = pd.DataFrame(registros)
-    df.to_csv(salida_csv, index=False)
+    df_final = pd.DataFrame(registros)
+    df_final.to_csv(salida_csv, index=False)
 
     end = time.perf_counter()
     print(f"Etapa 2 completada en {end - start:.2f} segundos")
-    print(f"Total de grafos procesados: {len(df)}")
+    print(f"Total de grafos procesados: {len(df_final)}")
 
+# -----------------------------
+# Main
+# -----------------------------
 if __name__ == "__main__":
     etapa_2_completa(
         config_path=RUTA_CONFIG / "ant_colony.txt",
