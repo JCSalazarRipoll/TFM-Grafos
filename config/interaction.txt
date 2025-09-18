@@ -1,42 +1,10 @@
-ia_graphs = {
-    "ia-email-EU": [
-        "https://networkrepository.com/ia-email-EU.php",
-        "https://nrvis.com/download/data/ia/ia-email-EU.zip"
-    ],
-    "ia-email-univ": [
-        "https://networkrepository.com/ia-email-univ.php",
-        "https://nrvis.com/download/data/ia/ia-email-univ.zip"
-    ],
-    "ia-escorts-dynamic": [
-        "https://networkrepository.com/ia-escorts-dynamic.php",
-        "https://nrvis.com/download/data/ia/ia-escorts-dynamic.zip"
-    ],
-    "ia-fb-messages": [
-        "https://networkrepository.com/ia-fb-messages.php",
-        "https://nrvis.com/download/data/ia/ia-fb-messages.zip"
-    ],
-    "ia-infect-hyper": [
-        "https://networkrepository.com/ia-infect-hyper.php",
-        "https://nrvis.com/download/data/ia/ia-infect-hyper.zip"
-    ],
-    "ia-infect-dublin": [
-        "https://networkrepository.com/ia-infect-dublin.php",
-        "https://nrvis.com/download/data/ia/ia-infect-dublin.zip"
-    ],
-    "ia-enron-large": [
-        "https://networkrepository.com/ia-enron-large.php",
-        "https://nrvis.com/download/data/ia/ia-enron-large.zip"
-    ],
-    "ia-frwikinews-user-edits": [
-        "https://networkrepository.com/ia-frwikinews-user-edits.php",
-        "https://nrvis.com/download/data/ia/ia-frwikinews-user-edits.zip"
-    ],
-    "ia-radoslaw-email": [
-        "https://networkrepository.com/ia-radoslaw-email.php",
-        "https://nrvis.com/download/data/ia/ia-radoslaw-email.zip"
-    ],
-    "ia-reality": [
-        "https://networkrepository.com/ia-reality.php",
-        "https://nrvis.com/download/data/ia/ia-reality.zip"
-    ]
-}
+ia-email-EU https://networkrepository.com/ia-email-EU.php   https://nrvis.com/download/data/ia/ia-email-EU.zip
+ia-email-univ   https://networkrepository.com/ia-email-univ.php https://nrvis.com/download/data/ia/ia-email-univ.zip
+ia-escorts-dynamic  https://networkrepository.com/ia-escorts-dynamic.php    https://nrvis.com/download/data/ia/ia-escorts-dynamic.zip
+ia-fb-messages  https://networkrepository.com/ia-fb-messages.php    https://nrvis.com/download/data/ia/ia-fb-messages.zip
+ia-infect-hyper https://networkrepository.com/ia-infect-hyper.php   https://nrvis.com/download/data/ia/ia-infect-hyper.zip
+ia-infect-dublin    https://networkrepository.com/ia-infect-dublin.php  https://nrvis.com/download/data/ia/ia-infect-dublin.zip
+ia-enron-large  https://networkrepository.com/ia-enron-large.php    https://nrvis.com/download/data/ia/ia-enron-large.zip
+ia-frwikinews-user-edits    https://networkrepository.com/ia-frwikinews-user-edits.php  https://nrvis.com/download/data/ia/ia-frwikinews-user-edits.zip
+ia-radoslaw-email   https://networkrepository.com/ia-radoslaw-email.php https://nrvis.com/download/data/ia/ia-radoslaw-email.zip
+ia-reality  https://networkrepository.com/ia-reality.php    https://nrvis.com/download/data/ia/ia-reality.zip
