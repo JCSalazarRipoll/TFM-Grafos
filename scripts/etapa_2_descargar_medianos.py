@@ -195,54 +195,58 @@ def leer_grupos_de_tres(path_txt):
 # -----------------------------
 # Funciones principales
 # -----------------------------
-
-
 def etapa_2_completa(config_path, carpeta_zip, salida_csv):
     registros = []
     start = time.perf_counter()
 
-    grupos = leer_grupos_de_tres(config_path)
+    with open(config_path, 'r') as f:
+        for linea in f:
+            if not linea.strip():
+                continue
 
-    for grupo in grupos:
-        nombre, url_php, url_zip = [line.strip().strip('"') for line in grupo]
-        print(f"Procesando: {nombre}")
+            print(linea.strip())  # Para trazabilidad
+            try:
+                nombre, url_php, url_zip = linea.strip().split('\t')
+            except ValueError:
+                print(f"Línea mal formateada: {linea.strip()}")
+                continue
 
-        zip_path = carpeta_zip / f"{nombre}.zip"
+            zip_path = carpeta_zip / f"{nombre}.zip"
 
-        # Descargar ZIP si no existe
-        descargado = descargar_zip(url_zip, carpeta_zip)
-        if not descargado:
-            print(f"No se pudo descargar: {nombre}")
-            continue
+            # Descargar ZIP si no existe
+            descargado = descargar_zip(url_zip, carpeta_zip)
+            if not descargado:
+                print(f"No se pudo descargar: {nombre}")
+                continue
 
-        # Extraer estadísticas desde la web
-        estadisticas = extraer_estadisticas_red(url_php)
-        if not estadisticas_completas(estadisticas):
-            print(f"Estadísticas incompletas: {nombre}")
+            # Extraer estadísticas desde la web
+            estadisticas = extraer_estadisticas_red(url_php)
+            if not estadisticas_completas(estadisticas):
+                print(f"Estadísticas incompletas: {nombre}")
 
-        # Calcular ASPL si es posible
-        aspl = None
-        try:
-            with zipfile.ZipFile(zip_path, 'r') as z:
-                for name in z.namelist():
-                    if name.endswith(('.mtx', '.edges', '.graph')):
-                        z.extract(name, path="temp_graph")
-                        graph_path = os.path.join("temp_graph", name)
-                        aspl = calcular_aspl(graph_path)
-                        os.remove(graph_path)
-                        break
-        except Exception as e:
-            print(f"Error al calcular ASPL para {nombre}: {e}")
+            # Calcular ASPL si es posible
+            aspl = None
+            try:
+                with zipfile.ZipFile(zip_path, 'r') as z:
+                    for name in z.namelist():
+                        if name.endswith(('.mtx', '.edges', '.graph')):
+                            z.extract(name, path="temp_graph")
+                            graph_path = os.path.join("temp_graph", name)
+                            aspl = calcular_aspl(graph_path)
+                            os.remove(graph_path)
+                            break
+            except Exception as e:
+                print(f"Error al calcular ASPL para {nombre}: {e}")
 
-        fila = {
-            "nombre": nombre,
-            "url_php": url_php,
-            "url_zip": url_zip,
-            "ASPL": aspl
-        }
-        fila.update(estadisticas)
-        registros.append(fila)
-        print(f"Procesado: {nombre}")
+            fila = {
+                "nombre": nombre,
+                "url_php": url_php,
+                "url_zip": url_zip,
+                "ASPL": aspl
+            }
+            fila.update(estadisticas)
+            registros.append(fila)
+            print(f"Procesado: {nombre}")
 
     df_final = pd.DataFrame(registros)
     df_final.to_csv(salida_csv, index=False)
