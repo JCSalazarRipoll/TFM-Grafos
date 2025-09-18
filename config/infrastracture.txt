@@ -1,9 +1,2 @@
-inf_graphs = {
-    "inf-USAir97": [
-        "https://networkrepository.com/inf-USAir97.php",
-        "https://nrvis.com/download/data/inf/inf-USAir97.zip"
-    ],
-    "inf-power": [
-        "https://networkrepository.com/inf-power.php",
-        "https://nrvis.com/download/data/inf/inf-power.zip"
-    ]
+inf-USAir97 https://networkrepository.com/inf-USAir97.php   https://nrvis.com/download/data/inf/inf-USAir97.zip
+inf-power   https://networkrepository.com/inf-power.php https://nrvis.com/download/data/inf/inf-power.zip
