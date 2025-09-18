@@ -1,38 +1,9 @@
-dimacs10_graphs = {
-    "wing-nodal": [
-        "https://networkrepository.com/wing-nodal.php",
-        "https://nrvis.com/download/data/dimacs10/wing_nodal.zip"
-    ],
-    "fe-sphere": [
-        "https://networkrepository.com/fe-sphere.php",
-        "https://nrvis.com/download/data/dimacs10/fe_sphere.zip"
-    ],
-    "delaunay-n14": [
-        "https://networkrepository.com/delaunay-n14.php",
-        "https://nrvis.com/download/data/dimacs10/delaunay_n14.zip"
-    ],
-    "fe-4elt2": [
-        "https://networkrepository.com/fe-4elt2.php",
-        "https://nrvis.com/download/data/dimacs10/fe-4elt2.zip"
-    ],
-    "delaunay-n13": [
-        "https://networkrepository.com/delaunay-n13.php",
-        "https://nrvis.com/download/data/dimacs10/delaunay_n13.zip"
-    ],
-    "delaunay-n12": [
-        "https://networkrepository.com/delaunay-n12.php",
-        "https://nrvis.com/download/data/dimacs10/delaunay_n12.zip"
-    ],
-    "delaunay-n11": [
-        "https://networkrepository.com/delaunay-n11.php",
-        "https://nrvis.com/download/data/dimacs10/delaunay_n11.zip"
-    ],
-    "bio-celegansneural": [
-        "https://networkrepository.com/bio-celegansneural.php",
-        "https://nrvis.com/download/data/dimacs10/bio-celegansneural.zip"
-    ],
-    "delaunay-n10": [
-        "https://networkrepository.com/delaunay-n10.php",
-        "https://nrvis.com/download/data/dimacs10/delaunay_n10.zip"
-    ]
-}
+wing-nodal  https://networkrepository.com/wing-nodal.php    https://nrvis.com/download/data/dimacs10/wing_nodal.zip
+fe-sphere   https://networkrepository.com/fe-sphere.php https://nrvis.com/download/data/dimacs10/fe_sphere.zip
+delaunay-n14    https://networkrepository.com/delaunay-n14.php  https://nrvis.com/download/data/dimacs10/delaunay_n14.zip
+fe-4elt2    https://networkrepository.com/fe-4elt2.php  https://nrvis.com/download/data/dimacs10/fe-4elt2.zip
+delaunay-n13    https://networkrepository.com/delaunay-n13.php  https://nrvis.com/download/data/dimacs10/delaunay_n13.zip
+delaunay-n12    https://networkrepository.com/delaunay-n12.php  https://nrvis.com/download/data/dimacs10/delaunay_n12.zip
+delaunay-n11    https://networkrepository.com/delaunay-n11.php  https://nrvis.com/download/data/dimacs10/delaunay_n11.zip
+bio-celegansneural  https://networkrepository.com/bio-celegansneural.php    https://nrvis.com/download/data/dimacs10/bio-celegansneural.zip
+delaunay-n10    https://networkrepository.com/delaunay-n10.php  https://nrvis.com/download/data/dimacs10/delaunay_n10.zip
