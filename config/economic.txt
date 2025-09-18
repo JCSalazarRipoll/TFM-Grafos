@@ -1,22 +1,5 @@
-econ_graphs = {
-    "econ-mahindas": [
-        "https://networkrepository.com/econ-mahindas.php",
-        "https://nrvis.com/download/data/econ/econ-mahindas.zip"
-    ],
-    "econ-orani678": [
-        "https://networkrepository.com/econ-orani678.php",
-        "https://nrvis.com/download/data/econ/econ-orani678.zip"
-    ],
-    "econ-psmigr1": [
-        "https://networkrepository.com/econ-psmigr1.php",
-        "https://nrvis.com/download/data/econ/econ-psmigr1.zip"
-    ],
-    "econ-psmigr2": [
-        "https://networkrepository.com/econ-psmigr2.php",
-        "https://nrvis.com/download/data/econ/econ-psmigr2.zip"
-    ],
-    "econ-psmigr3": [
-        "https://networkrepository.com/econ-psmigr3.php",
-        "https://nrvis.com/download/data/econ/econ-psmigr3.zip"
-    ]
-}
+econ-mahindas   https://networkrepository.com/econ-mahindas.php https://nrvis.com/download/data/econ/econ-mahindas.zip
+econ-orani678   https://networkrepository.com/econ-orani678.php https://nrvis.com/download/data/econ/econ-orani678.zip
+econ-psmigr1    https://networkrepository.com/econ-psmigr1.php  https://nrvis.com/download/data/econ/econ-psmigr1.zip
+econ-psmigr2    https://networkrepository.com/econ-psmigr2.php  https://nrvis.com/download/data/econ/econ-psmigr2.zip
+econ-psmigr3    https://networkrepository.com/econ-psmigr3.php  https://nrvis.com/download/data/econ/econ-psmigr3.zip
