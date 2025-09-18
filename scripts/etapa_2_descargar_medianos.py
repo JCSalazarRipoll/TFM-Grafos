@@ -17,18 +17,6 @@ RUTA_DESTINO.mkdir(parents=True, exist_ok=True)
 RUTA_SALIDA = Path("data/metadata/descargas_etapa2.csv")
 RUTA_SALIDA.parent.mkdir(parents=True, exist_ok=True)
 
-# -----------------------------
-# Funciones auxiliares
-# -----------------------------
-def normalizar_valor(valor: str) -> float:
-    valor = valor.replace(",", "")
-    if valor.endswith("K"):
-        return float(valor[:-1]) * 1_000
-    elif valor.endswith("M"):
-        return float(valor[:-1]) * 1_000_000
-    else:
-        return float(valor)
-
 def estadisticas_completas(estadisticas: dict) -> bool:
     METRICAS_ESPERADAS = [
         "Nodes", "Edges", "Density", "Maximum degree", "Minimum degree",
@@ -103,6 +91,73 @@ def descargar_zip(url_zip, destino):
         print(f"Error al descargar {nombre}: {e}")
         return False
 
+
+def etapa_2_completa(config_path, carpeta_zip, salida_csv):
+    registros = []
+    start = time.perf_counter()
+
+    with open(config_path, 'r') as f:
+        for linea in f:
+            if not linea.strip():
+                continue
+            nombre, url_php, url_zip = linea.strip().split('\t')
+            zip_path = carpeta_zip / f"{nombre}.zip"
+
+            # Descargar ZIP si no existe
+            descargado = descargar_zip(url_zip, carpeta_zip)
+            if not descargado:
+                print(f"❌ No se pudo descargar: {nombre}")
+                continue
+
+            # Extraer estadísticas desde la web
+            estadisticas = extraer_estadisticas_red(url_php)
+            if not estadisticas_completas(estadisticas):
+                print(f"⚠️ Estadísticas incompletas: {nombre}")
+
+            # Calcular ASPL si es posible
+            aspl = None
+            try:
+                with zipfile.ZipFile(zip_path, 'r') as z:
+                    for name in z.namelist():
+                        if name.endswith(('.mtx', '.edges', '.graph')):
+                            z.extract(name, path="temp_graph")
+                            graph_path = os.path.join("temp_graph", name)
+                            aspl = calcular_aspl(graph_path)
+                            os.remove(graph_path)
+                            break
+            except Exception as e:
+                print(f"❌ Error al calcular ASPL para {nombre}: {e}")
+
+            # Registrar todo
+            fila = {
+                "nombre": nombre,
+                "url_php": url_php,
+                "url_zip": url_zip,
+                "ASPL": aspl
+            }
+            fila.update(estadisticas)
+            registros.append(fila)
+            print(f"✅ Procesado: {nombre}")
+
+    df = pd.DataFrame(registros)
+    df.to_csv(salida_csv, index=False)
+
+    end = time.perf_counter()
+    print(f"Etapa 2 completada en {end - start:.2f} segundos")
+    print(f"Total de grafos procesados: {len(df)}")
+
+
+# -----------------------------
+# Funciones auxiliares
+# -----------------------------
+def calcular_aspl(path_grafo):
+    G = cargar_grafo(path_grafo)
+    if G.number_of_nodes() == 0 or G.number_of_edges() == 0:
+        return None  # grafo vacío
+    if not nx.is_connected(G):
+        return None  # grafo no conexo
+    return nx.average_shortest_path_length(G)
+
 def cargar_grafo(path):
     with open(path, 'r') as f:
         lines = [line for line in f if not line.strip().startswith('%') and line.strip()]
@@ -120,16 +175,18 @@ def cargar_grafo(path):
     G.add_edges_from(edges)
     return G
 
+def normalizar_valor(valor: str) -> float:
+    valor = valor.replace(",", "")
+    if valor.endswith("K"):
+        return float(valor[:-1]) * 1_000
+    elif valor.endswith("M"):
+        return float(valor[:-1]) * 1_000_000
+    else:
+        return float(valor)
 
-
-def calcular_aspl(path_grafo):
-    G = cargar_grafo(path_grafo)
-    if G.number_of_nodes() == 0 or G.number_of_edges() == 0:
-        return None  # grafo vacío
-    if not nx.is_connected(G):
-        return None  # grafo no conexo
-    return nx.average_shortest_path_length(G)
-
+# -----------------------------
+# Funciones principales
+# -----------------------------
 def reparar_aspl_en_csv(csv_path, zip_folder, output_csv):
     df = pd.read_csv(csv_path)
     filas_actualizadas = []
@@ -176,13 +233,10 @@ def reparar_aspl_en_csv(csv_path, zip_folder, output_csv):
     print(f"Reparación completada en {end - start:.2f} segundos")
     print(f"Total de grafos procesados: {len(df_final)}")
 
-
 if __name__ == "__main__":
-    reparar_aspl_en_csv(
-        csv_path="data/metadata/descargas_etapa2.csv",
-        zip_folder="data/grafos_medianos/",
-        output_csv="data/metadata/descargas_etapa2_reparado.csv"
+    etapa_2_completa(
+        config_path=RUTA_CONFIG / "ant_colony.txt",
+        carpeta_zip=RUTA_DESTINO,
+        salida_csv=RUTA_SALIDA
     )
 
-
-    
