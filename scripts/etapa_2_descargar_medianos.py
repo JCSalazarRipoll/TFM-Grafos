@@ -263,10 +263,17 @@ def etapa_2_completa(config_path, carpeta_zip, salida_csv):
 # -----------------------------
 # Main
 # -----------------------------
+import glob
+
 if __name__ == "__main__":
-    etapa_2_completa(
-        config_path=RUTA_CONFIG / "ant_colony.txt",
-        carpeta_zip=RUTA_DESTINO,
-        salida_csv=RUTA_SALIDA
-    )
+    for config_file in RUTA_CONFIG.glob("*.txt"):
+        print(f"\n📂 Procesando archivo: {config_file.name}")
+        salida_individual = RUTA_SALIDA / f"{config_file.stem}.csv"
+
+        etapa_2_completa(
+            config_path=config_file,
+            carpeta_zip=RUTA_DESTINO,
+            salida_csv=salida_individual
+        )
+
 
