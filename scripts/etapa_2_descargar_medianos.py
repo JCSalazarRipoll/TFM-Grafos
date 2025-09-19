@@ -17,6 +17,8 @@ RUTA_DESTINO = Path("data/grafos_medianos/")
 RUTA_DESTINO.mkdir(parents=True, exist_ok=True)
 RUTA_SALIDA = Path("data/metadata/descargas_etapa2.csv")
 RUTA_SALIDA.parent.mkdir(parents=True, exist_ok=True)
+RUTA_SALIDA_DIR = Path("data/metadata/descargas_etapa2")
+RUTA_SALIDA_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # -----------------------------
@@ -266,9 +268,16 @@ def etapa_2_completa(config_path, carpeta_zip, salida_csv):
 import glob
 
 if __name__ == "__main__":
+    print(f"Ruta de salida: {RUTA_SALIDA}")
+    print(f"¿Existe carpeta de salida?: {RUTA_SALIDA.parent.exists()}")
+
+    # Si no existe, la creamos explícitamente
+    RUTA_SALIDA.parent.mkdir(parents=True, exist_ok=True)
+    
     for config_file in RUTA_CONFIG.glob("*.txt"):
         print(f"\n📂 Procesando archivo: {config_file.name}")
-        salida_individual = RUTA_SALIDA / f"{config_file.stem}.csv"
+        salida_individual = RUTA_SALIDA_DIR / f"{config_file.stem}.csv"
+
 
         etapa_2_completa(
             config_path=config_file,
