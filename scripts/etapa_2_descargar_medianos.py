@@ -218,7 +218,9 @@ def etapa_2_completa(config_path, carpeta_zip, salida_csv):
     
             nombre, url_php, url_zip = match.groups()
 
-            zip_path = carpeta_zip / f"{nombre}.zip"
+            zip_filename = url_zip.split("/")[-1]  
+            zip_path = carpeta_zip / zip_filename  
+
 
             # Descargar ZIP si no existe
             descargado = descargar_zip(url_zip, carpeta_zip)
