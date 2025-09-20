@@ -55,6 +55,44 @@ def extraer_estadisticas_red(url_php):
         "Upgrade-Insecure-Requests": "1"
     }
 
+    try:
+        response = requests.get(url_php, headers=headers, timeout=10)
+        response.raise_for_status()
+    except Exception as e:
+        print(f"Error al acceder a {url_php}: {e}")
+        return {}
+
+    soup = BeautifulSoup(response.text, "html.parser")
+    tabla = soup.find("table", id="sortTableExample")
+    if not tabla:
+        print("No se encontró la tabla de estadísticas.")
+        return {}
+
+    resultados = {}
+    for fila in tabla.find_all("tr"):
+        celdas = fila.find_all("td")
+        if len(celdas) == 2:
+            clave = celdas[0].text.strip()
+            valor = celdas[1].text.strip()
+            resultados[clave] = normalizar_valor(valor)
+
+    return resultados
+
+
+def extraer_estadisticas_red2(url_php):
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/115.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1"
+    }
+
     response = requests.get(url_php, headers=headers, timeout=10)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
