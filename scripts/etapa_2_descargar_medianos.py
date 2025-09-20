@@ -63,67 +63,30 @@ def extraer_estadisticas_red(url_php):
         return {}
 
     soup = BeautifulSoup(response.text, "html.parser")
-    tabla = soup.find("table", id="sortTableExample")
+
+    # Encuentra el panel con el título correcto
+    panel = soup.find("div", class_="panel panel-red margin-bottom-40 bg-stats-table")
+    if not panel:
+        print("No se encontró el panel de estadísticas.")
+        return {}
+
+    tabla = panel.find("table", id="sortTableExample")
     if not tabla:
-        print("No se encontró la tabla de estadísticas.")
+        print("No se encontró la tabla dentro del panel.")
         return {}
 
     resultados = {}
     for fila in tabla.find_all("tr"):
         celdas = fila.find_all("td")
         if len(celdas) == 2:
-            clave = celdas[0].text.strip()
-            valor = celdas[1].text.strip()
-            resultados[clave] = normalizar_valor(valor)
+            clave = celdas[0].get_text(strip=True)
+            valor = celdas[1].get_text(strip=True)
+            try:
+                resultados[clave] = normalizar_valor(valor)
+            except ValueError:
+                continue
 
-    return resultados
-
-
-def extraer_estadisticas_red2(url_php):
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/115.0.0.0 Safari/537.36"
-        ),
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.9",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Connection": "keep-alive",
-        "Upgrade-Insecure-Requests": "1"
-    }
-
-    response = requests.get(url_php, headers=headers, timeout=10)
-    response.raise_for_status()
-    soup = BeautifulSoup(response.text, "html.parser")
-    text = soup.get_text(separator="\n")
-    stats_section = soup.find(text=re.compile("Network Data Statistics"))
-    if not stats_section:
-        return {}
-    stats_text = stats_section.parent.get_text(separator="\n")
-
-    patrones = {
-        "Nodes": r"Nodes\s+([0-9\.KM]+)",
-        "Edges": r"Edges\s+([0-9\.KM]+)",
-        "Density": r"Density\s+([0-9\.]+)",
-        "Maximum degree": r"Maximum degree\s+([0-9\.K]+)",
-        "Minimum degree": r"Minimum degree\s+([0-9]+)",
-        "Average degree": r"Average degree\s+([0-9\.]+)",
-        "Assortativity": r"Assortativity\s+([\-0-9\.]+)",
-        "Number of triangles": r"Number of triangles\s+([0-9\.KM]+)",
-        "Average number of triangles": r"Average number of triangles\s+([0-9\.]+)",
-        "Maximum number of triangles": r"Maximum number of triangles\s+([0-9\.KM]+)",
-        "Average clustering coefficient": r"Average clustering coefficient\s+([0-9\.]+)",
-        "Fraction of closed triangles": r"Fraction of closed triangles\s+([0-9\.]+)",
-        "Maximum k-core": r"Maximum k-core\s+([0-9]+)",
-        "Lower bound of Maximum Clique": r"Lower bound of Maximum Clique\s+([0-9]+)"
-    }
-
-    resultados = {}
-    for k, patron in patrones.items():
-        match = re.search(patron, stats_text)
-        if match:
-            resultados[k] = normalizar_valor(match.group(1))
+    print(f"Extraídas {len(resultados)} métricas de {url_php}")
     return resultados
 
 def estadisticas_completas(estadisticas: dict) -> bool:
