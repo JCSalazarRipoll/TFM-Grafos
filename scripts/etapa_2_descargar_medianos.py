@@ -278,7 +278,9 @@ if __name__ == "__main__":
     RUTA_SALIDA.parent.mkdir(parents=True, exist_ok=True)
     
     for config_file in RUTA_CONFIG.glob("*.txt"):
-        print(f"\n📂 Procesando archivo: {config_file.name}")
+        if config_file.name != "interaction.txt":
+            continue
+        print(f"\n Procesando archivo: {config_file.name}")
         salida_individual = RUTA_SALIDA_DIR / f"{config_file.stem}.csv"
 
 
