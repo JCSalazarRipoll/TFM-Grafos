@@ -1,0 +1,7 @@
+nombre,url_php,url_zip,ASPL,Nodes,Edges,Density,Maximum degree,Minimum degree,Average degree,Assortativity,Number of triangles,Average number of triangles,Maximum number of triangles,Average clustering coefficient,Fraction of closed triangles,Maximum k-core,Lower bound of Maximum Clique
+epinions,https://networkrepository.com/epinions.php,https://nrvis.com/download/data/heter/epinions.zip,,131600.0,840800.0,9.71283e-05,3600.0,1.0,12.0,-0.0362489,27900000.0,212.0,107700.0,0.156481,0.111073,180.0,19.0
+actor,https://networkrepository.com/actor.php,https://nrvis.com/download/data/heter/actor.zip,,767300.0,767300.0,2.60661e-06,383600.0,1.0,1.0,1.01588,0.0,0.0,0.0,0.0,0.0,2.0,3.0
+dbpedia,https://networkrepository.com/dbpedia.php,https://nrvis.com/download/data/heter/dbpedia.zip,,258899.99999999997,495900.0,1.48031e-05,258899.99999999997,1.0,3.0,0.958807,1800000.0,6.0,355600.0,0.985679,3.78228e-05,7.0,6.0
+movielens-10m-noRatings,https://networkrepository.com/movielens-10m-noRatings.php,https://nrvis.com/download/data/heter/movielens-10m-noRatings.zip,,28100.0,286700.0,0.000724348,12000.0,2.0,20.0,-0.117161,15200000.0,539.0,247600.0,10.4251,0.052332,641.0,3.0
+digg,https://networkrepository.com/digg.php,https://nrvis.com/download/data/heter/digg.zip,,283200.0,283200.0,7.06257e-06,279600.0,1.0,1.0,1.02339,0.0,0.0,0.0,0.0,0.0,2.0,3.0
+movielens-10m,https://networkrepository.com/movielens-10m.php,https://nrvis.com/download/data/heter/movielens-10m.zip,,69900.0,97100.0,3.97635e-05,69900.0,1.0,2.0,1.48636,189400.0,2.0,40800.0,0.472967,7.18656e-05,5.0,5.0

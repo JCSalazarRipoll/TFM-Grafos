@@ -1,0 +1,3 @@
+nombre,url_php,url_zip,ASPL,Nodes,Edges,Density,Maximum degree,Minimum degree,Average degree,Assortativity,Number of triangles,Average number of triangles,Maximum number of triangles,Average clustering coefficient,Fraction of closed triangles,Maximum k-core,Lower bound of Maximum Clique
+inf-USAir97,https://networkrepository.com/inf-USAir97.php,https://nrvis.com/download/data/inf/inf-USAir97.zip,2.7381247042550867,332.0,2100.0,0.0386925,139.0,1.0,12.0,-0.207876,36500.0,110.0,1400.0,0.625217,0.396392,27.0,22.0
+inf-power,https://networkrepository.com/inf-power.php,https://nrvis.com/download/data/inf/inf-power.zip,18.989185424445708,4900.0,6600.0,0.000540303,19.0,1.0,2.0,0.00345699,2000.0,0.0,21.0,0.0801036,0.103153,6.0,6.0
