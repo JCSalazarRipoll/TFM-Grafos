@@ -140,7 +140,7 @@ def reparar_aspl_en_csv(csv_path, zip_folder, output_csv):
     start = time.perf_counter()
 
     for _, row in df.iterrows():
-        nombre = row['nombre']
+        nombre = row['name']
         aspl_actual = row.get('ASPL', None)
 
         # Verifica si el ASPL es válido (float)
