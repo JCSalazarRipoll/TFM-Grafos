@@ -41,9 +41,9 @@ columnas_clave = [
     'Lower bound of Maximum Clique'
 ]
 
-print(f"🔍 Grafos antes de limpieza: {len(df)}")
+print(f"Grafos antes de limpieza: {len(df)}")
 df = df.dropna(subset=columnas_clave)
-print(f"✅ Grafos después de limpieza: {len(df)}")
+print(f"Grafos después de limpieza: {len(df)}")
 
 X = df[[col for col in columnas_clave if col != "ASPL"]]
 y = df["ASPL"]
@@ -134,4 +134,4 @@ plt.tight_layout()
 plt.savefig("Models/comparacion_modelos.png")
 plt.close()
 
-print("✅ Entrenamiento completado. Resultados guardados en 'Models/'")
+print("Entrenamiento completado. Resultados guardados en 'Models/'")
