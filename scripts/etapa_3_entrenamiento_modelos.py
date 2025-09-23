@@ -1,9 +1,9 @@
-# etapa_3_entrenamiento_modelos.py
 # -----------------------------
 # Librerías
 # -----------------------------
 import os
 import glob
+import time
 import pandas as pd
 import numpy as np
 import joblib
@@ -20,46 +20,13 @@ from xgboost import XGBRegressor
 from tpot import TPOTRegressor
 
 # -----------------------------
-# Paso 0: Verificar columna 'name'
-# -----------------------------
-def verificar_y_renombrar_nombre():
-    ruta_csvs = "data/metadata/descargas_etapa2/*.csv"
-    archivos = glob.glob(ruta_csvs)
-    modificados = []
-
-    for archivo in archivos:
-        df = pd.read_csv(archivo)
-
-        if "name" in df.columns:
-            continue
-        if "nombre" in df.columns:
-            df.rename(columns={"nombre": "name"}, inplace=True)
-            df.to_csv(archivo, index=False)
-            modificados.append(os.path.basename(archivo))
-
-    if modificados:
-        os.makedirs("Models", exist_ok=True)
-        with open("Models/log_renombrados.txt", "w") as f:
-            for nombre in modificados:
-                f.write(nombre + "\n")
-        print(f"🔧 Renombrados: {len(modificados)} archivos. Log guardado en 'Models/log_renombrados.txt'")
-    else:
-        print("✅ Todos los archivos ya tenían la columna 'name'")
-
-verificar_y_renombrar_nombre()
-
-# -----------------------------
-# Paso 1: Cargar datos
+# Paso 1: Cargar y limpiar datos
 # -----------------------------
 csv_files = glob.glob("data/metadata/descargas_etapa2/*.csv")
 df = pd.concat([pd.read_csv(f) for f in csv_files], ignore_index=True)
 
-# -----------------------------
-# Paso 2: Filtrar datos
-# -----------------------------
-df = df.dropna(subset=["ASPL"])  # Solo grafos con ASPL válido
-
-columnas_viables = [
+columnas_clave = [
+    'ASPL',
     'Nodes',
     'Edges',
     'Maximum degree',
@@ -74,11 +41,15 @@ columnas_viables = [
     'Lower bound of Maximum Clique'
 ]
 
-X = df[columnas_viables]
+print(f"🔍 Grafos antes de limpieza: {len(df)}")
+df = df.dropna(subset=columnas_clave)
+print(f"✅ Grafos después de limpieza: {len(df)}")
+
+X = df[[col for col in columnas_clave if col != "ASPL"]]
 y = df["ASPL"]
 
 # -----------------------------
-# Paso 3: Definir modelos
+# Paso 2: Definir modelos
 # -----------------------------
 kf = KFold(n_splits=5, shuffle=True, random_state=42)
 
@@ -93,13 +64,15 @@ models = {
 }
 
 # -----------------------------
-# Paso 4: Entrenamiento clásico
+# Paso 3: Entrenamiento clásico
 # -----------------------------
 os.makedirs("Models", exist_ok=True)
 resultados = []
 
 for model_name, model in models.items():
     mae_list, rmse_list, r2_list = [], [], []
+
+    start_time = time.time()
 
     for train_index, test_index in kf.split(X):
         X_train, X_test = X.iloc[train_index], X.iloc[test_index]
@@ -112,21 +85,29 @@ for model_name, model in models.items():
         rmse_list.append(np.sqrt(mean_squared_error(y_test, y_pred)))
         r2_list.append(r2_score(y_test, y_pred))
 
+    end_time = time.time()
+    tiempo_segundos = round(end_time - start_time, 2)
+
     joblib.dump(model, f"Models/modelo_{model_name.replace(' ', '_')}.pkl")
 
     resultados.append({
         "Modelo": model_name,
         "MAE": np.mean(mae_list),
         "RMSE": np.mean(rmse_list),
-        "R²": np.mean(r2_list)
+        "R²": np.mean(r2_list),
+        "Tiempo (s)": tiempo_segundos
     })
 
 # -----------------------------
-# Paso 5: TPOT (modelo genético)
+# Paso 4: TPOT (modelo genético)
 # -----------------------------
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+start_time = time.time()
 tpot = TPOTRegressor(generations=5, population_size=20, random_state=42)
 tpot.fit(X_train, y_train)
+end_time = time.time()
+tiempo_tpot = round(end_time - start_time, 2)
 
 best_model = tpot.fitted_pipeline_
 y_pred = best_model.predict(X_test)
@@ -137,11 +118,12 @@ resultados.append({
     "Modelo": "TPOT (Genético)",
     "MAE": mean_absolute_error(y_test, y_pred),
     "RMSE": np.sqrt(mean_squared_error(y_test, y_pred)),
-    "R²": r2_score(y_test, y_pred)
+    "R²": r2_score(y_test, y_pred),
+    "Tiempo (s)": tiempo_tpot
 })
 
 # -----------------------------
-# Paso 6: Guardar resultados
+# Paso 5: Guardar resultados
 # -----------------------------
 df_resultados = pd.DataFrame(resultados)
 df_resultados.to_csv("Models/resultados_modelos.csv", index=False)
