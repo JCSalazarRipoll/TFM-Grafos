@@ -18,7 +18,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 from xgboost import XGBRegressor
 from tpot import TPOTRegressor
-from tpot.config import regressor_config_dict
 
 # -----------------------------
 # Paso 1: Cargar y limpiar datos
@@ -110,11 +109,10 @@ start_time = time.time()
 tpot = TPOTRegressor(
     generations=3,
     population_size=10,
-    max_time_mins=20,              # límite total de tiempo
-    max_eval_time_mins=2,          # límite por modelo
-    config_dict=regressor_config_dict,  # espacio de búsqueda acotado
+    max_time_mins=20,
+    max_eval_time_mins=2,
     random_state=42,
-    n_jobs=-1                      # usa todos los núcleos disponibles
+    n_jobs=-1
 )
 
 tpot.fit(X_train, y_train)
