@@ -112,8 +112,10 @@ tpot = TPOTRegressor(
     max_time_mins=20,
     max_eval_time_mins=2,
     random_state=42,
-    n_jobs=-1
+    n_jobs=-1,
+    use_dask=False  # evita el error de workers
 )
+
 
 tpot.fit(X_train, y_train)
 end_time = time.time()
