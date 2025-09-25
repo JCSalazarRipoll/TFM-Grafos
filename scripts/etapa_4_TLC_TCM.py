@@ -2,25 +2,28 @@
 import os
 import glob
 import networkx as nx
+from scipy.io import mmread
 
-# Ruta a la carpeta con los grafos
-carpeta_grafos = "/data/grafos_masivos"
-archivos = glob.glob(os.path.join(carpeta_grafos, "*.mxt"))  # ajusta extensión si es .edges o .csv
+# Ruta raíz
+carpeta_raiz = "/content/TFM-Grafos/data/grafos_masivos"
+archivos_mtx = glob.glob(os.path.join(carpeta_raiz, "**/*.mtx"), recursive=True)
 
 grafos_masivos = {}
 
-print(f"Buscando archivos en: {carpeta_grafos}")
-print(f"Archivos encontrados: {archivos}")
+print(f"🔍 Archivos encontrados: {len(archivos_mtx)}")
 
-for archivo in archivos:
+for archivo in archivos_mtx:
     nombre = os.path.basename(archivo).split('.')[0]
     try:
-        G = nx.read_edgelist(archivo, nodetype=int)
-        if nx.is_connected(G):
-            grafos_masivos[nombre] = G
-            print(f"Grafo '{nombre}' cargado con {G.number_of_nodes()} nodos y {G.number_of_edges()} aristas.")
-        else:
-            print(f"Grafo '{nombre}' no es conexo. Se omite.")
+        matriz = mmread(archivo).tocoo()
+        G = nx.Graph()
+        G.add_edges_from(zip(matriz.row, matriz.col))
+
+        if not nx.is_connected(G):
+            G = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+
+        grafos_masivos[nombre] = G
+        print(f"✅ '{nombre}': {G.number_of_nodes()} nodos, {G.number_of_edges()} aristas.")
     except Exception as e:
-        print(f"Error al cargar '{nombre}': {e}")
+        print(f"❌ Error al cargar '{nombre}': {e}")
 
