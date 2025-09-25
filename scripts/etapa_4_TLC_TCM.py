@@ -23,7 +23,7 @@ for archivo in archivos_mtx:
             G = G.subgraph(max(nx.connected_components(G), key=len)).copy()
 
         grafos_masivos[nombre] = G
-        print(f"✅ '{nombre}': {G.number_of_nodes()} nodos, {G.number_of_edges()} aristas.")
+        print(f" '{nombre}': {G.number_of_nodes()} nodos, {G.number_of_edges()} aristas.")
     except Exception as e:
-        print(f"❌ Error al cargar '{nombre}': {e}")
+        print(f" Error al cargar '{nombre}': {e}")
 
