@@ -5,9 +5,12 @@ import networkx as nx
 
 # Ruta a la carpeta con los grafos
 carpeta_grafos = "/data/grafos_masivos"
-archivos = glob.glob(os.path.join(carpeta_grafos, "*.txt"))  # ajusta extensión si es .edges o .csv
+archivos = glob.glob(os.path.join(carpeta_grafos, "*.mxt"))  # ajusta extensión si es .edges o .csv
 
 grafos_masivos = {}
+
+print(f"Buscando archivos en: {carpeta_grafos}")
+print(f"Archivos encontrados: {archivos}")
 
 for archivo in archivos:
     nombre = os.path.basename(archivo).split('.')[0]
