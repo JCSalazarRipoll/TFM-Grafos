@@ -15,9 +15,9 @@ for archivo in archivos:
         G = nx.read_edgelist(archivo, nodetype=int)
         if nx.is_connected(G):
             grafos_masivos[nombre] = G
-            print(f"✅ Grafo '{nombre}' cargado con {G.number_of_nodes()} nodos y {G.number_of_edges()} aristas.")
+            print(f"Grafo '{nombre}' cargado con {G.number_of_nodes()} nodos y {G.number_of_edges()} aristas.")
         else:
-            print(f"⚠️ Grafo '{nombre}' no es conexo. Se omite.")
+            print(f"Grafo '{nombre}' no es conexo. Se omite.")
     except Exception as e:
-        print(f"❌ Error al cargar '{nombre}': {e}")
+        print(f"Error al cargar '{nombre}': {e}")
 
