@@ -6,7 +6,7 @@ import networkx as nx
 from datetime import datetime
 
 #  Rutas
-ruta_mtx = "/content/TFM-Grafos/data/grafos_masivos/soc-livejournal/soc-livejournal.mtx"
+ruta_mtx = "/content/TFM-Grafos/data/grafos_masivos/soc-livejournal_descomprimido/soc-livejournal.mtx"
 carpeta_resultados = "/content/TFM-Grafos/resultados_etapa_4"
 os.makedirs(carpeta_resultados, exist_ok=True)
 
