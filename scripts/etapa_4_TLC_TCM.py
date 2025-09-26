@@ -8,12 +8,12 @@ import networkx as nx
 from scipy.io import mmread
 from datetime import datetime
 
-# Configuración de rutas
+#  Rutas
 carpeta_raiz = "/content/TFM-Grafos/data/grafos_masivos"
 carpeta_resultados = "/content/TFM-Grafos/resultados_etapa_4"
 os.makedirs(carpeta_resultados, exist_ok=True)
 
-# Detectar qué grafos procesar
+#  Detectar qué grafos procesar
 def detectar_grafos_pendientes():
     archivos_csv = glob.glob(os.path.join(carpeta_resultados, "resultados_*.csv"))
     if not archivos_csv:
@@ -54,7 +54,7 @@ def muestrear_por_TLC(nombre_grafo, G, tamaños=[500, 1000, 2000], repeticiones=
         aspls = []
 
         for rep in range(repeticiones):
-            nodos_muestra = random.sample(G.nodes(), tamaño)
+            nodos_muestra = random.sample(list(G.nodes()), tamaño)  # ✅ FIX aplicado aquí
             subgrafo = G.subgraph(nodos_muestra)
 
             if nx.is_connected(subgrafo):
@@ -90,3 +90,4 @@ if __name__ == "__main__":
         grafos = cargar_grafos(grafos_a_cargar)
         for nombre, G in grafos.items():
             muestrear_por_TLC(nombre, G)
+
