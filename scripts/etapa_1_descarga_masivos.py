@@ -36,8 +36,8 @@ def descargar_y_descomprimir(nombre, url, carpeta_descarga="data/grafos_masivos"
 # -----------------------------
 grafos_masivos = {
     "soc-flickr": "https://nrvis.com/download/data/soc/soc-flickr.zip",
-    "soc-livejournal": "https://nrvis.com/download/data/soc/soc-livejournal.zip",
-    "soc-pokec": "https://nrvis.com/download/data/soc/soc-pokec.zip"
+    "soc-youtube-snap": "https://nrvis.com/download/data/soc/soc-youtube-snap.zip",
+    "ca-dblp-2012": "https://nrvis.com/download/data/ca/ca-dblp-2012.zip"
 }
 
 if __name__ == "__main__":
