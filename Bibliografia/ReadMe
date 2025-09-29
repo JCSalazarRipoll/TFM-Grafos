@@ -1,2 +1,3 @@
 Leskovec, J., & Faloutsos, C. (2006). Sampling from large graphs. Proceedings of the 12th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 631-636. http://cs.stanford.edu/people/jure/pubs/sampling-kdd06.pdf
 Ahmed, N. K., Neville, J., Rossi, R. A., & Duffield, N. (2014). Graph sample and hold: A framework for big-graph analytics. Proceedings of the 20th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1446-1455. http://nesreenahmed.com/papers/ahmed-kdd14.pdf
+Watts, D. J., & Strogatz, S. H. (1998). Collective dynamics of 'small-world' networks. Nature, 393(6684), 440-442. https://snap.stanford.edu/class/cs224w-readings/watts98smallworld.pdf
