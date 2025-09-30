@@ -1,5 +1,7 @@
-Muestreo y estimación en grafos
+Disclaimaer: Todos los documentos fueron descargados de fuentes públicas o institucionales que permiten su uso académico. 
+Se respetan los derechos de autor conforme a las políticas de cada publicación.
 
+Muestreo y estimación en grafos
 Leskovec & Faloutsos	2006	Sampling from large graphs	Fundamento para BFS y expansión controlada
 Ahmed et al.	2014	Graph sample and hold	Inspiración para estrategias de retención adaptativa
 Ribeiro & Towsley	2010	Multidimensional random walks	Alternativa para muestreo con sesgo controlado
@@ -8,21 +10,18 @@ Constantin et al.	2023	Monte Carlo method for sample size analysis	Apoyo metodol
 
 
 Modelado y estructura de redes
-
 Watts & Strogatz	1998	Collective dynamics of 'small-world' networks	Base conceptual para propiedades de redes reales
 Newman	2010	Networks: An introduction	Referencia general para métricas como ASPL y centralidad
 Charpentier & Flachaire	2019	Extended scale-free networks	Complemento para análisis de distribuciones de grado
 
 
 Métricas y herramientas de análisis
-
 Palmer et al.	2002	ANF: A fast and scalable tool	Justificación para cálculo eficiente de ASPL
 Brandes & Fleischer	2005	Centrality measures based on current flow	Métrica alternativa para análisis de conectividad
 Dasgupta et al.	2014	On estimating the average degree	Apoyo para validación de dispersión y densidad
 
 
 Aprendizaje Automático y Estadística
-
 Breiman	2001	Random forests	Referencia para clasificación de subgrafos
 Friedman	2001	Gradient boosting machine	Base para comparación de modelos supervisados
 Chen & Guestrin	2016	XGBoost	Algoritmo principal para evaluación de eficiencia
