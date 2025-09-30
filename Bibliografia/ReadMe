@@ -12,3 +12,5 @@ Avrachenkov, K., & Dreveton, M. (2022). Statistical analysis of networks. Now Pu
 Brandes, U., & Fleischer, D. (2005). Centrality measures based on current flow. In V. Diekert & B. Durand (Eds.), STACS 2005 (Vol. 3404, pp. 533–544). Lecture Notes in Computer Science. Springer. https://doi.org/10.1007/978-3-540-31856-9_44
 Constantin, M. A., Schuurman, N. K., & Vermunt, J. K. (2023). A general Monte Carlo method for sample size analysis in the context of network models. Psychological Methods. Advance online publication. https://scispace.com/pdf/a-general-monte-carlo-method-for-sample-size-analysis-in-the-45zule7pr4.pdf
 Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5–32. https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf
+Friedman, J. H. (2001). Greedy function approximation: A gradient boosting machine. The Annals of Statistics, 29(5), 1189–1232. https://jerryfriedman.su.domains/ftp/trebst.pdf
+Chen, T., & Guestrin, C. (2016). XGBoost: A scalable tree boosting system. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 785–794). ACM. https://arxiv.org/pdf/1603.02754
