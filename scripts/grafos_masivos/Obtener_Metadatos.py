@@ -11,6 +11,18 @@ RUTA_SALIDA_DIR.mkdir(parents=True, exist_ok=True)
 # -----------------------------
 # Función auxiliar
 # -----------------------------
+def normalizar_valor(valor: str) -> float:
+    valor = valor.replace(",", "")
+    if valor.endswith("K"):
+        return float(valor[:-1]) * 1_000
+    elif valor.endswith("M"):
+        return float(valor[:-1]) * 1_000_000
+    else:
+        return float(valor)
+
+# -----------------------------
+# Función principal
+# -----------------------------
 def extraer_estadisticas_red(url_php):
     headers = {
         "User-Agent": (
