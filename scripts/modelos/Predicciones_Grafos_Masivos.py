@@ -25,6 +25,16 @@ features = [
 ]
 
 # -----------------------------
+# Modelos seleccionados
+# -----------------------------
+modelos_usables = {
+    "Random_Forest",
+    "XGBoost",
+    "Gradient_Boosting",
+    "Extra_Trees"
+}
+
+# -----------------------------
 # Cargar metadatos
 # -----------------------------
 df = pd.read_csv(RUTA_METADATOS)
@@ -35,6 +45,11 @@ X = df[features]
 # -----------------------------
 for modelo_path in RUTA_MODELOS.glob("modelo*.pkl"):
     nombre_modelo = modelo_path.stem.replace("modelo_", "")
+    
+    if nombre_modelo not in modelos_usables:
+        print(f"Modelo descartado: {nombre_modelo}")
+        continue
+
     print(f"Usando modelo: {nombre_modelo}")
 
     try:
