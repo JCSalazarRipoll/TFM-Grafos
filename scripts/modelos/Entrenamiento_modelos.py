@@ -104,13 +104,43 @@ for model_name, model in models.items():
 # -----------------------------
 # Paso 5: Guardar resultados
 # -----------------------------
-df_resultados = pd.DataFrame(resultados)
-df_resultados.to_csv("Models/resultados_modelos.csv", index=False)
-
+# Gráfica 1: Métricas principales (MAE, RMSE, R²)
 df_resultados.plot(x="Modelo", y=["MAE", "RMSE", "R²"], kind="bar", figsize=(10,6))
 plt.title("Comparación de modelos de regresión")
+plt.ylabel("Valor promedio")
 plt.tight_layout()
 plt.savefig("Models/comparacion_modelos.png")
 plt.close()
 
-print("Entrenamiento completado. Resultados guardados en 'Models/'")
+# Gráfica 2: Tiempo de entrenamiento
+df_resultados.plot(x="Modelo", y="Tiempo (s)", kind="bar", color="gray", figsize=(8,5))
+plt.title("Tiempo de entrenamiento por modelo")
+plt.ylabel("Segundos")
+plt.tight_layout()
+plt.savefig("Models/tiempo_entrenamiento.png")
+plt.close()
+
+# Gráfica 3: Desviación estándar de MAE
+df_resultados.plot(x="Modelo", y="MAE_std", kind="bar", color="skyblue", figsize=(8,5))
+plt.title("Variabilidad del MAE por modelo")
+plt.ylabel("Desviación estándar")
+plt.tight_layout()
+plt.savefig("Models/variabilidad_mae.png")
+plt.close()
+
+# Gráfica 4: Desviación estándar de RMSE
+df_resultados.plot(x="Modelo", y="RMSE_std", kind="bar", color="salmon", figsize=(8,5))
+plt.title("Variabilidad del RMSE por modelo")
+plt.ylabel("Desviación estándar")
+plt.tight_layout()
+plt.savefig("Models/variabilidad_rmse.png")
+plt.close()
+
+# Gráfica 5: Desviación estándar de R²
+df_resultados.plot(x="Modelo", y="R²_std", kind="bar", color="limegreen", figsize=(8,5))
+plt.title("Variabilidad del R² por modelo")
+plt.ylabel("Desviación estándar")
+plt.tight_layout()
+plt.savefig("Models/variabilidad_r2.png")
+plt.close()
+
