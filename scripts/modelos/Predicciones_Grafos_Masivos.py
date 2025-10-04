@@ -17,7 +17,7 @@ RUTA_SALIDA_DIR.mkdir(parents=True, exist_ok=True)
 # Features esperadas
 # -----------------------------
 features = [
-    "Nodes", "Edges", "Density", "Maximum degree", "Minimum degree",
+    "Nodes", "Edges", "Maximum degree", 
     "Average degree", "Assortativity", "Number of triangles",
     "Average number of triangles", "Maximum number of triangles",
     "Average clustering coefficient", "Fraction of closed triangles",
