@@ -74,7 +74,7 @@ grafos_masivos = {
 if __name__ == "__main__":
     registros = []
     for nombre, url in grafos_masivos.items():
-        estadisticas = extraer_estadisticas_red(nombre, url)
+        estadisticas = extraer_estadisticas_red(url)
         fila = {
                 "nombre": nombre,
                 "url": url
