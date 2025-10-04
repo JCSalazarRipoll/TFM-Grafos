@@ -2,9 +2,16 @@
 # -----------------------------
 # Librerías
 # -----------------------------
-import os
-import pandas as pd
+# Librerías estándar
+import os, re, csv, time, zipfile
 from pathlib import Path
+
+# Librerías externas
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import networkx as nx
+import re
 
 # -----------------------------
 # Configuración de ruta
