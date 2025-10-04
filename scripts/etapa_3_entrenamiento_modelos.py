@@ -1,3 +1,4 @@
+#etapa_3_entrenamiento_modelos
 # -----------------------------
 # Librerías
 # -----------------------------
@@ -95,6 +96,9 @@ for model_name, model in models.items():
         "MAE": np.mean(mae_list),
         "RMSE": np.mean(rmse_list),
         "R²": np.mean(r2_list),
+        "MAE_std": np.std(mae_list),
+        "RMSE_std": np.std(rmse_list),
+        "R²_std": np.std(r2_list),
         "Tiempo (s)": tiempo_segundos
     })
 
@@ -131,6 +135,9 @@ resultados.append({
     "MAE": mean_absolute_error(y_test, y_pred),
     "RMSE": np.sqrt(mean_squared_error(y_test, y_pred)),
     "R²": r2_score(y_test, y_pred),
+    "MAE_std": np.std(mae_list),
+    "RMSE_std": np.std(rmse_list),
+    "R²_std": np.std(r2_list),
     "Tiempo (s)": tiempo_tpot
 })
 
