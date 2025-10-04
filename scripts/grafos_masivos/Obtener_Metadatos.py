@@ -82,5 +82,5 @@ if __name__ == "__main__":
         fila.update(estadisticas)
         registros.append(fila)
     df_final = pd.DataFrame(registros)
-    salida_csv = RUTA_SALIDA_DIR / f"{nombre}.csv"
+    salida_csv = RUTA_SALIDA_DIR / "metadatos_grafos_masivos.csv"
     df_final.to_csv(salida_csv, index=False)
