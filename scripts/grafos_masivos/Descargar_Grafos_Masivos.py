@@ -45,9 +45,3 @@ if __name__ == "__main__":
     for nombre, url in grafos_masivos.items():
         ruta_final = descargar_y_descomprimir(nombre, url)
         print(f"Grafo listo: {ruta_final}")
-
-
- 
- 
- 
-
