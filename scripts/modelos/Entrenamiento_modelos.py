@@ -116,7 +116,7 @@ tpot = TPOTRegressor(
     max_time_mins=20,
     max_eval_time_mins=2,
     random_state=42,
-    n_jobs=-1
+    n_jobs=1
 )
 
 
