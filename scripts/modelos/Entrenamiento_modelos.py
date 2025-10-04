@@ -104,6 +104,8 @@ for model_name, model in models.items():
 # -----------------------------
 # Paso 5: Guardar resultados
 # -----------------------------
+df_resultados = pd.DataFrame(resultados)
+
 # Gráfica 1: Métricas principales (MAE, RMSE, R²)
 df_resultados.plot(x="Modelo", y=["MAE", "RMSE", "R²"], kind="bar", figsize=(10,6))
 plt.title("Comparación de modelos de regresión")
