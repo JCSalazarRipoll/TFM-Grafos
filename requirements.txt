@@ -25,7 +25,6 @@ beautifulsoup4==4.13.5     # Parsing de HTML para scraping
 # -----------------------------
 scikit-learn==1.6.1        # Modelos ML clásicos y métricas
 xgboost==3.0.4             # Boosting eficiente para regresión/clasificación
-tpot==1.1.0                # AutoML basado en evolución genética
 
 # -----------------------------
 # Estructura de grafos
