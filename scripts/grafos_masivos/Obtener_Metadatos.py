@@ -4,7 +4,11 @@
 # -----------------------------
 import os
 import pandas as pd
+from pathlib import Path
 
+# -----------------------------
+# Configuración de ruta
+# -----------------------------
 RUTA_SALIDA_DIR = Path("data/metadata/descargas_etapa1")
 RUTA_SALIDA_DIR.mkdir(parents=True, exist_ok=True)
 
