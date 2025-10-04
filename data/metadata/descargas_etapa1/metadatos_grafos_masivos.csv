@@ -1,0 +1,4 @@
+nombre,url,Nodes,Edges,Density,Maximum degree,Minimum degree,Average degree,Assortativity,Number of triangles,Average number of triangles,Maximum number of triangles,Average clustering coefficient,Fraction of closed triangles,Maximum k-core,Lower bound of Maximum Clique
+soc-flickr,https://networkrepository.com/soc-flickr.php,514000.0,3200000.0,2.41551e-05,4400.0,1.0,12.0,0.157802,176300000.0,343.0,524500.0,0.167599,0.154791,310.0,53.0
+soc-youtube-snap,https://networkrepository.com/soc-youtube-snap.php,1100000.0,3000000.0,4.63926e-06,28800.0,1.0,5.0,-0.0369099,9200000.0,8.0,180800.0,0.0808023,0.00621856,52.0,16.0
+ca-dblp-2012,https://networkrepository.com/ca-dblp-2012.php,317100.0,1000000.0,2.08847e-05,343.0,1.0,6.0,0.266521,6700000.0,21.0,8300.0,0.632431,0.306377,114.0,102.0
