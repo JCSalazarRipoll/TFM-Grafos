@@ -18,7 +18,6 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 from xgboost import XGBRegressor
-from tpot import TPOTRegressor
 
 # -----------------------------
 # Paso 1: Cargar y limpiar datos
@@ -101,44 +100,6 @@ for model_name, model in models.items():
         "R²_std": np.std(r2_list),
         "Tiempo (s)": tiempo_segundos
     })
-
-# -----------------------------
-# Paso 4: TPOT (modelo genético)
-# -----------------------------
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-
-start_time = time.time()
-
-tpot = TPOTRegressor(
-    generations=3,
-    population_size=10,
-    max_time_mins=20,
-    max_eval_time_mins=2,
-    random_state=42,
-    n_jobs=1
-)
-
-
-tpot.fit(X_train, y_train)
-end_time = time.time()
-tiempo_tpot = round(end_time - start_time, 2)
-
-best_model = tpot.fitted_pipeline_
-y_pred = best_model.predict(X_test)
-
-joblib.dump(best_model, "Models/modelo_TPOT.pkl")
-
-resultados.append({
-    "Modelo": "TPOT (Genético)",
-    "MAE": mean_absolute_error(y_test, y_pred),
-    "RMSE": np.sqrt(mean_squared_error(y_test, y_pred)),
-    "R²": r2_score(y_test, y_pred),
-    "MAE_std": np.std(mae_list),
-    "RMSE_std": np.std(rmse_list),
-    "R²_std": np.std(r2_list),
-    "Tiempo (s)": tiempo_tpot
-})
 
 # -----------------------------
 # Paso 5: Guardar resultados
