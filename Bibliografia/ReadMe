@@ -10,18 +10,24 @@ Constantin et al.	2023	Monte Carlo method for sample size analysis	Apoyo metodol
 
 
 Modelado y estructura de redes
+Erdős & Rényi	1960	On the evolution of random graphs	Modelo ER clásico para redes aleatorias
 Watts & Strogatz	1998	Collective dynamics of 'small-world' networks	Base conceptual para propiedades de redes reales
+Barabási & Albert	1999	Emergence of scaling in random networks	Modelo BA para redes con ley de potencias
+Clauset, Shalizi & Newman	2009	Power-law distributions in empirical data	Validación empírica de distribuciones de grado
 Newman	2010	Networks: An introduction	Referencia general para métricas como ASPL y centralidad
 Charpentier & Flachaire	2019	Extended scale-free networks	Complemento para análisis de distribuciones de grado
 
 
 Métricas y herramientas de análisis
 Palmer et al.	2002	ANF: A fast and scalable tool	Justificación para cálculo eficiente de ASPL
+Boldi & Vigna	2011	HyperANF: Estimating distances in large graphs	Algoritmo avanzado para estimación en grafos web-scale
 Brandes & Fleischer	2005	Centrality measures based on current flow	Métrica alternativa para análisis de conectividad
 Dasgupta et al.	2014	On estimating the average degree	Apoyo para validación de dispersión y densidad
+Cormen et al.	2009	Introduction to Algorithms	Algoritmos clásicos para caminos más cortos (BFS, Dijkstra, Floyd-Warshall)
 
 
 Aprendizaje Automático y Estadística
+
 Breiman	2001	Random forests	Referencia para clasificación de subgrafos
 Friedman	2001	Gradient boosting machine	Base para comparación de modelos supervisados
 Chen & Guestrin	2016	XGBoost	Algoritmo principal para evaluación de eficiencia
